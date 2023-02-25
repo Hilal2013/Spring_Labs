@@ -15,6 +15,6 @@ public abstract class Balance {
         this.userId = userId;
         this.amount = amount;
     }
-
+public  abstract  BigDecimal addBalance(BigDecimal amount);
 
 }

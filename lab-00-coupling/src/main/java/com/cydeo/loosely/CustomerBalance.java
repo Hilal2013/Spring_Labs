@@ -8,4 +8,9 @@ public class CustomerBalance extends Balance{
         super(userId, amount);
     }
 
+    public BigDecimal addBalance(BigDecimal amount) {
+        setAmount(this.getAmount().add(amount));
+        return this.getAmount();
+    }
+
 }
