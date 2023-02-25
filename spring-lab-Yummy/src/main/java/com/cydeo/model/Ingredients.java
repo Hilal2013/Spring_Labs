@@ -1,7 +1,5 @@
 package com.cydeo.model;
 
-import com.cydeo.QuantityType;
-
 import java.math.BigDecimal;
 
 public class Ingredients {
