@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class RecipeRepository implements RecipeSaveRepository {
     @Override
     public void save(Recipe recipe) {
-        System.out.println("Store recipe:" + recipe);
+        System.out.println("Stored recipe" );
     }
 }

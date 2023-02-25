@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class FacebookShareProxy implements ShareRecipeProxy{
     @Override
     public void shareRecipe(Recipe recipe) {
-        System.out.println("Recipe:" + recipe.toString());
+        System.out.println("Recipe on Facebook:" + recipe.getName());
     }
 }

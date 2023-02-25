@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class InstagramShareProxy implements ShareRecipeProxy {
     @Override
     public void shareRecipe(Recipe recipe) {
-        System.out.println("Recipe: " + recipe.toString());
+        System.out.println("Recipe on Instagram: " + recipe.getName());
     }
 }

@@ -16,12 +16,18 @@ public class RecipeApplication {
 
     public static void main(String[] args) {
         ApplicationContext container =    SpringApplication.run(RecipeApplication.class, args);
-
-
+        Recipe recipe=new Recipe();
+recipe.setName("Baklava");
         RecipeService recipeService=container.getBean(RecipeService.class);
- //       recipeService.prepareRecipe();
-
-
+       recipeService.prepareRecipe(recipe);
+//Bocconcini
+//Rice Syrup
+//Parmesan Cheese
+//Spearmint
+//Corella Pear
+//Stored recipe
+//Recipe on Facebook:Baklava
+recipeService.printDbRecipeConfigData();//Chuck
 
     }
 

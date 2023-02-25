@@ -14,10 +14,9 @@ import java.util.Random;
 public class RecipeService {
     private final ShareRecipeProxy shareRecipeProxy;
     private final RecipeSaveRepository recipeSaveRepository;
-  //  private final Faker faker;
-  //  private final Random random;
+
 private final DBRecipeConfigData dbRecipeConfigData;
-    public RecipeService(ShareRecipeProxy shareRecipeProxy, RecipeSaveRepository recipeSaveRepository, DBRecipeConfigData dbRecipeConfigData) {
+    public RecipeService(DBRecipeConfigData dbRecipeConfigData,ShareRecipeProxy shareRecipeProxy, RecipeSaveRepository recipeSaveRepository) {
         this.dbRecipeConfigData = dbRecipeConfigData;
         this.shareRecipeProxy = shareRecipeProxy;
         this.recipeSaveRepository = recipeSaveRepository;
@@ -28,7 +27,7 @@ private final DBRecipeConfigData dbRecipeConfigData;
         List<Recipe> list = new ArrayList<>();
         Faker faker=new Faker();
         Random random=new Random();
-        for (int i = 0; i < random.nextInt(list.size()); i++) {
+        for (int i = 0; i <5; i++) {
             System.out.println(faker.food().ingredient());
         }
 
@@ -37,7 +36,7 @@ private final DBRecipeConfigData dbRecipeConfigData;
 
     }
 public void printDbRecipeConfigData(){
-    System.out.println();
+    System.out.println(dbRecipeConfigData.getName());
 
 }
 
