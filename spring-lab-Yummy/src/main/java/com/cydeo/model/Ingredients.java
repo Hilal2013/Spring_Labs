@@ -1,7 +1,9 @@
 package com.cydeo.model;
 
-import java.math.BigDecimal;
+import lombok.Data;
 
+import java.math.BigDecimal;
+@Data
 public class Ingredients {
     private String name;
     private BigDecimal quantity;
