@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan("com.cydeo")
-@Data
+//@Data
 public class RecipeConfig {
 
 

@@ -26,7 +26,7 @@ public class Config {
 
     @Bean
     public Saving saving(Currency currency) {
-        return new Saving(currency,BigDecimal.valueOf(120.3),UUID.randomUUID());
+        return new Saving(currency,new BigDecimal("120.3"),UUID.randomUUID());
     }
 
 

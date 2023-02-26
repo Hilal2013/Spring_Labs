@@ -26,7 +26,7 @@ private final DBRecipeConfigData dbRecipeConfigData;
     public void prepareRecipe(Recipe recipe) {
         List<Recipe> list = new ArrayList<>();
         Faker faker=new Faker();
-        Random random=new Random();
+      //  Random random=new Random();
         for (int i = 0; i <5; i++) {
             System.out.println(faker.food().ingredient());
         }
