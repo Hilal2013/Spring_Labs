@@ -12,13 +12,13 @@ public class EmployeeApp {
         ApplicationContext context=new AnnotationConfigApplicationContext(EmployeeConfig.class, StringConfig.class);
         FullTimeEmployee ft=context.getBean(FullTimeEmployee.class);
         PartTimeEmployee pt=context.getBean(PartTimeEmployee.class);
-
-String str1=context.getBean("string1",String.class);
-        System.out.println(str1);
+        ft.createAccount();//full time account
+        pt.createAccount();//part time account
+        String str1=context.getBean("string1",String.class);
+        System.out.println(str1);//Welcome to CydeoApp
         String str2=context.getBean("Spring",String.class);
-        System.out.println(str2);
+        System.out.println(str2);////Spring Core Practice
 
-        //Welcome to CydeoApp
-        //Spring Core Practice
+
     }
 }

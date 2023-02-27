@@ -15,5 +15,4 @@ public class StringConfig {
         return "Spring Core Practice";
     }
 
-
 }
