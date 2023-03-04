@@ -1,9 +1,12 @@
 package com.cydeo.lab04springmvc.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 public class LabController {
-
+@RequestMapping("/lab")//http://localhost:8080/lab
     public String labList(Model model){
         model.addAttribute("firstLab","lab-00-coupling");
         model.addAttribute("secondLab","lab-01-IoC");
