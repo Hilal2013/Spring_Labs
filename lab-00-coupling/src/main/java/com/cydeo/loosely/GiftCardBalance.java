@@ -18,5 +18,4 @@ public class GiftCardBalance extends Balance{
         return this.getAmount();
     }
 
-
 }

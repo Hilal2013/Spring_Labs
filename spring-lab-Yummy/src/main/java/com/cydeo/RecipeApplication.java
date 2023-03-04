@@ -21,8 +21,7 @@ public class RecipeApplication {
     public static void main(String[] args) {
         ApplicationContext container =    SpringApplication.run(RecipeApplication.class, args);
         Recipe recipe=new Recipe();
-
-recipe.setName("Blue Cheese Stuffed Tomatoes");
+        recipe.setName("Blue Cheese Stuffed Tomatoes");
         recipe.setRecipeType(RecipeType.APPETIZER);
         RecipeService recipeService=container.getBean(RecipeService.class);
        recipeService.prepareRecipe(recipe);
