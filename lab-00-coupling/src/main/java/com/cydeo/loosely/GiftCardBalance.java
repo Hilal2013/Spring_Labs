@@ -17,5 +17,17 @@ public class GiftCardBalance extends Balance{
         setAmount(this.getAmount().add(amount).add(bonusAmount));
         return this.getAmount();
     }
+    public static void main(String[] args) {
+        BigDecimal bd = new BigDecimal(1);
+        BigDecimal bd2 = new BigDecimal(3);
 
+        BigDecimal result = bd.divide(bd2, MathContext.DECIMAL32);
+        System.out.println(result);//0.3333333//7 digits
+        result = bd.divide(bd2, MathContext.DECIMAL64);
+        System.out.println(result);//0.3333333333333333//16 digits
+        result = bd.divide(bd2, MathContext.DECIMAL128);
+        System.out.println(result);//0.3333333333333333333333333333333333 //34 digits
+        result = bd.divide(bd2, MathContext.UNLIMITED);
+        System.out.println(result);//.ArithmeticException
+    }
 }
