@@ -5,6 +5,7 @@ import com.cydeo.lab05thymeleaf.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -25,10 +26,10 @@ model.addAttribute("product",new Product());
         return "product/create-product";
     }
     @PostMapping("/create-form")
-    public String addProduct(){
+    public String addProduct(@ModelAttribute("product") Product product){
 
-
-        return "redirect:/create-product";
+productService.productCreate(product);
+        return "redirect:/list";
     }
 
     @GetMapping("/list")
