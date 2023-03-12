@@ -1,19 +1,11 @@
 package com.cydeo;
 
-import com.cydeo.model.Ingredients;
-import com.cydeo.model.QuantityType;
 import com.cydeo.model.Recipe;
 import com.cydeo.model.RecipeType;
-import com.cydeo.service.RecipeService;
-import com.github.javafaker.Faker;
+import com.cydeo.service.RecipeServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 @SpringBootApplication
 public class RecipeApplication {
@@ -23,7 +15,7 @@ public class RecipeApplication {
         Recipe recipe=new Recipe();
         recipe.setName("Blue Cheese Stuffed Tomatoes");
         recipe.setRecipeType(RecipeType.APPETIZER);
-        RecipeService recipeService=container.getBean(RecipeService.class);
+        RecipeServiceImpl recipeService=container.getBean(RecipeServiceImpl.class);
        recipeService.prepareRecipe(recipe);
 //Bocconcini
 //Rice Syrup
