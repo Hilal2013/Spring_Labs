@@ -14,9 +14,9 @@ public class LoginController {
    // localhost:8080/login/abc@email.com/1234124241
     @RequestMapping("/login/{email}/{phoneNumber}")
     public String login(@PathVariable String email, @PathVariable String phoneNumber, Model model){
-        model.addAttribute("email",email);
+        model.addAttribute("email",email);//green one attribute-key//the other one parameter//dynamic
         model.addAttribute("phoneNumber",phoneNumber);
-        model.addAttribute("loginMessage","Login Successful!");
+        model.addAttribute("loginMessage","Login Successful!");//login message static
 
         return "login/login-info";
     }

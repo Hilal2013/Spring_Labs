@@ -22,7 +22,11 @@ public class RecipeApplication {
         System.out.println("authorConfig.getSurname() = " + authorConfig.getSurname());
     //or
 recipeService.printDbRecipeConfigData();
-
+//Stored recipe
+//Recipe on Facebook:Tacos
+//authorConfig.getName() = Mike
+//authorConfig.getSurname() = Smith
+//Mike
     }
 
 }
