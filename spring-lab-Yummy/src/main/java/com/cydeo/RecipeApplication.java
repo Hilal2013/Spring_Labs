@@ -1,5 +1,6 @@
 package com.cydeo;
 
+import com.cydeo.config.AuthorConfigData;
 import com.cydeo.model.Recipe;
 import com.cydeo.model.RecipeType;
 import com.cydeo.service.RecipeServiceImpl;
@@ -12,19 +13,15 @@ public class RecipeApplication {
 
     public static void main(String[] args) {
         ApplicationContext container =    SpringApplication.run(RecipeApplication.class, args);
-        Recipe recipe=new Recipe();
-        recipe.setName("Blue Cheese Stuffed Tomatoes");
-        recipe.setRecipeType(RecipeType.APPETIZER);
+
         RecipeServiceImpl recipeService=container.getBean(RecipeServiceImpl.class);
-       recipeService.prepareRecipe(recipe);
-//Bocconcini
-//Rice Syrup
-//Parmesan Cheese
-//Spearmint
-//Corella Pear
-//Stored recipe
-//Recipe on Facebook:Baklava
-recipeService.printDbRecipeConfigData();//Chuck
+       recipeService.prepareRecipe();
+        AuthorConfigData authorConfig = container.getBean(AuthorConfigData.class);
+
+        System.out.println("authorConfig.getName() = " + authorConfig.getName());
+        System.out.println("authorConfig.getSurname() = " + authorConfig.getSurname());
+    //or
+recipeService.printDbRecipeConfigData();
 
     }
 

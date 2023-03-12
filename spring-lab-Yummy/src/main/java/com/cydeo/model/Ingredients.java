@@ -6,6 +6,6 @@ import java.math.BigDecimal;
 @Data
 public class Ingredients {
     private String name;
-    private BigDecimal quantity;
+    private int quantity;
     private QuantityType quantityType;
 }

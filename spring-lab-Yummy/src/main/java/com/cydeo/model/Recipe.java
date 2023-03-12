@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Recipe {
     private UUID id;
     private String name;
-    private String duration;
+    private int duration;
     private String preparation;
     private List<Ingredients> ingredients;
     private RecipeType recipeType;
