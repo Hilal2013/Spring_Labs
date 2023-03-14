@@ -26,14 +26,14 @@ model.addAttribute("cartTotalAmount", CartServiceImpl.CART.getCartTotalAmount())
     }
 
     @GetMapping("/addToCart/{productId}/{quantity}")
-    public String addToCart(@PathVariable UUID productId,@PathVariable Integer quantity){
+    public String addToCart(@PathVariable ("productId") UUID productId,@PathVariable("quantity") Integer quantity){
 
 cartService.addToCart(productId,quantity);
         return "redirect:/list";
     }
 
     @GetMapping("/delete/{productId}")
-    public String delete(@PathVariable UUID productId){
+    public String delete(@PathVariable ("productId") UUID productId){
 cartService.deleteFromCart(productId);
 
         return "redirect:/cart";
