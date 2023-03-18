@@ -25,11 +25,14 @@ model.addAttribute("product",new Product());
 
         return "product/create-product";
     }
+
+
+
     @PostMapping("/create-form")
     public String addProduct(@ModelAttribute("product") Product product){
 
 productService.productCreate(product);
-        return "redirect:/list";
+        return "redirect:/create-product";
     }
 
     @GetMapping("/list")
