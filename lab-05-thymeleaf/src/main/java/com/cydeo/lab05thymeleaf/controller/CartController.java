@@ -26,9 +26,9 @@ model.addAttribute("cartTotalAmount", CartServiceImpl.CART.getCartTotalAmount())
     }
 
     @GetMapping("/addToCart/{productId}/{quantity}")
-    public String addToCart(@PathVariable ("productId") String productId,@PathVariable("quantity") int quantity){
+    public String addToCart(@PathVariable ("productId") UUID productId,@PathVariable("quantity") Integer quantity){
 
-cartService.addToCart(UUID.fromString(productId),quantity);
+cartService.addToCart(productId,quantity);
         return "redirect:/list";
     }
 
