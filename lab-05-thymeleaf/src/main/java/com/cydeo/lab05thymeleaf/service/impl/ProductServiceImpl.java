@@ -21,7 +21,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean productCreate(Product product){
         // todo implement method
-productRepository.save(product);
+        //first set Id
+       product.setId(UUID.randomUUID());
+       productRepository.save(product);
         return true;
     }
 
