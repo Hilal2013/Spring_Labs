@@ -1,6 +1,6 @@
 package com.cydeo.lab05thymeleaf.controller;
 
-import com.cydeo.lab05thymeleaf.model.Cart;
+
 import com.cydeo.lab05thymeleaf.service.CartService;
 import com.cydeo.lab05thymeleaf.service.impl.CartServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ private  final CartService cartService;
     public String showCart(Model model){
         model.addAttribute("cart",CART);
 //model.addAttribute("cartList",CartServiceImpl.CART.getCartItemList());
-model.addAttribute("cartTotalAmount", CART.getCartTotalAmount());
+//model.addAttribute("cartTotalAmount", CART.getCartTotalAmount());
         return "cart/show-cart";
     }
 
@@ -34,7 +34,7 @@ model.addAttribute("cartTotalAmount", CART.getCartTotalAmount());
     public String addToCart(@PathVariable ("productId") UUID productId,@PathVariable("quantity") Integer quantity){
 
 cartService.addToCart(productId,quantity);
-        return "redirect:/list";
+        return "redirect:/cart";
     }
 
     @GetMapping("/delete/{productId}")
