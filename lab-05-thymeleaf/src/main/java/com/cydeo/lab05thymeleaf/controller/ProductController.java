@@ -18,6 +18,13 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/list")
+    public String retrieveList(Model model){
+
+        model.addAttribute("productList",productService.listProduct());
+        return "product/list";
+    }
+
     @GetMapping("/create-form")
     public String createProduct(Model model){
 
@@ -27,20 +34,11 @@ model.addAttribute("product",new Product());
     }
 
 
-
-
     @PostMapping("/create-product")
     public String addProduct(@ModelAttribute("product") Product product){
 
 productService.productCreate(product);
         return "redirect:/list";
-    }
-
-    @GetMapping("/list")
-    public String retrieveList(Model model){
-
-model.addAttribute("productList",productService.listProduct());
-        return "product/list";
     }
 
 
