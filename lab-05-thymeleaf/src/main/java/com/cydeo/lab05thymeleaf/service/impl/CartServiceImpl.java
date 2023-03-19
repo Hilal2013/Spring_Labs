@@ -27,14 +27,14 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart addToCart(UUID productId, Integer quantity){
         //todo retrieve product from repository method
-        Product product = productService.findProductById(productId);
+     //   Product product = productService.findProductById(productId);
         //todo initialise cart item
-    CartItem cartItem= CART.getCartItemList().stream()
-                .filter(p->p.getProduct().getId().equals(productId))
-                .findAny().get();
+    //CartItem cartItem= CART.getCartItemList().stream()
+         //       .filter(p->p.getProduct().getId().equals(productId))
+        //        .findAny().get();
 
         //todo calculate cart total amount
-     cartItem.setTotalAmount(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+    // cartItem.setTotalAmount(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
         //todo add to cart
 
         return CART;
