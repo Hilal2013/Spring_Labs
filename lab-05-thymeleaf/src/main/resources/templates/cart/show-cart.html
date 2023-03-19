@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="theCartItem:${cart}">
+                    <tr th:each="theCartItem:${cart.getCartItemList()}">
                         <td th:text="${theCartItem.getProduct().getName()}"></td> <!-- todo product variables-->
                         <td th:text="${theCartItem.getQuantity()}"></td><!-- todo product variables-->
                         <td th:text="${theCartItem.getTotalAmount()}"></td><!-- todo product variables-->
