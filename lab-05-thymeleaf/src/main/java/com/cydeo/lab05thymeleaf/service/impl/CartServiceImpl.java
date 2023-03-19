@@ -48,10 +48,11 @@ CART.getCartItemList().add(cartItem);
     public boolean deleteFromCart(UUID productId){
 
         //todo delete product object from cart using stream
-        CART.getCartItemList().stream()
-                .filter(cartItem -> cartItem.getProduct().getId().equals(productId))
+        CartItem itemToDelete  =  CART.getCartItemList().stream()
+                .filter(c -> c.getProduct().getId().equals(productId))
                 .findAny().get();
+        CART.setCartTotalAmount(CART.getCartTotalAmount().subtract(itemToDelete.getTotalAmount()));
 
-        return true;
+        return CART.getCartItemList().remove(itemToDelete);
     }
 }
