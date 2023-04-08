@@ -14,13 +14,11 @@ public class Genre {
     private Long Id;
 
     private String name;
-    @ManyToMany
-    @JoinTable(name = "MovieGenreRel",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    @ManyToMany(mappedBy = "genreList")
     private List<Movie> movieList;
 
-    public Genre(String name) {
+    public Genre(String name, List<Movie> movieList) {
         this.name = name;
+        this.movieList = movieList;
     }
 }
