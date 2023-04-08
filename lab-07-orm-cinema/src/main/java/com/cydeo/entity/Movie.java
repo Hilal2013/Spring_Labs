@@ -31,7 +31,10 @@ public class Movie {
     private String summary;
     @OneToMany(mappedBy = "movie")
     private List<MovieCinema> movieCinemaList;
-    @ManyToMany(mappedBy = "movieList")
+    @ManyToMany
+    @JoinTable(name = "MovieGenreRel",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genreList;
     public Movie(String name, State state, Type type, LocalDateTime releaseDate, BigDecimal price, Integer duration, String summary) {
         this.name = name;
