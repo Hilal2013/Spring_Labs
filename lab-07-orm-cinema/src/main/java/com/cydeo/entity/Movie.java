@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String name;
     @Enumerated(EnumType.STRING)
@@ -28,5 +29,17 @@ public class Movie {
     private BigDecimal price;
     private Integer duration;
     private String summary;
-
+    @OneToMany(mappedBy = "movie")
+    private List<MovieCinema> movieCinemaList;
+    @ManyToMany(mappedBy = "movieList")
+    private List<Genre> genreList;
+    public Movie(String name, State state, Type type, LocalDateTime releaseDate, BigDecimal price, Integer duration, String summary) {
+        this.name = name;
+        this.state = state;
+        this.type = type;
+        this.releaseDate = releaseDate;
+        this.price = price;
+        this.duration = duration;
+        this.summary = summary;
+    }
 }
