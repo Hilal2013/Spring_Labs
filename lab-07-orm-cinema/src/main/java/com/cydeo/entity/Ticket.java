@@ -20,7 +20,7 @@ public class Ticket {
     private Integer seatNumber;
     private Integer rowNumber;
     @ManyToOne
-    @JoinColumn(name="movie_cineme_id")
+   // @JoinColumn(name="movie_cinema_id")
     private MovieCinema movieCinema;
     @ManyToOne
     private UserAccount userAccount;
