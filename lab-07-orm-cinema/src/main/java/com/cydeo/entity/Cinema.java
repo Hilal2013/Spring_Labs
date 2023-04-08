@@ -3,10 +3,8 @@ package com.cydeo.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -14,9 +12,15 @@ import javax.persistence.Id;
 public class Cinema {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cinemaId;
+    private Long id;
     private String name;
     private String sponsoredName;
+@OneToMany(mappedBy = "cinema")
+private List<MovieCinema> movieCinemaList;
+
+@ManyToOne
+@JoinColumn(name = "location_id")
+private Location location;
 
     public Cinema(String name, String sponsoredName) {
         this.name = name;
