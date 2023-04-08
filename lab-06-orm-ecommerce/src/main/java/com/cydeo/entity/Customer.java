@@ -19,8 +19,8 @@ public class Customer {
     private String userName;
 @OneToMany(mappedBy = "customer")
     private List<Address> addressList;
-
-//private Balance balance;
+@OneToOne(mappedBy = "customer")
+private Balance balance;
 
     public Customer(String email, String firstName, String lastName, String userName) {
         this.email = email;
