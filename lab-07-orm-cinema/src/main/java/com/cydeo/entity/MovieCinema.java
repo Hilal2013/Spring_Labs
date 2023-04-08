@@ -21,8 +21,8 @@ public class MovieCinema {
     private Movie movie;
     @ManyToOne
     private Cinema cinema;
-    @ManyToOne
-    private MovieCinema movieCinema;
+
+
 
     public MovieCinema(LocalDateTime dateTime) {
         this.dateTime = dateTime;
