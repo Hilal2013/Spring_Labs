@@ -18,6 +18,7 @@ public class Address {
     private String zipCode;
    @ManyToOne
    @JoinColumn(name = "customer_id")
+   //@JoinColumn(name = "id")
     private Customer customer;
 
 
