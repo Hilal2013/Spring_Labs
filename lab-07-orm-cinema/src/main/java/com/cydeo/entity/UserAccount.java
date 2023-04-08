@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,9 +18,11 @@ public class UserAccount {
     private String password;
     private String username;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "account_details_id")
     private AccountDetails accountDetails;
+@OneToMany(mappedBy = "userAccount")
+    private List<Ticket> ticketList;
     public UserAccount(String email, String password, String username) {
         this.email = email;
         this.password = password;
