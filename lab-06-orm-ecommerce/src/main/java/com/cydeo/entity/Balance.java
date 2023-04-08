@@ -15,9 +15,9 @@ public class Balance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal amount;
-   // @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   //  @JoinColumn(name = "customer_id")
-   // private Customer customer;
+    private Customer customer;
     public Balance(BigDecimal amount) {
         this.amount = amount;
     }
