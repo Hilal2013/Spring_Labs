@@ -17,10 +17,17 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String userName;
-@OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer")
     private List<Address> addressList;
-@OneToOne(mappedBy = "customer")
-private Balance balance;
+
+    @OneToOne(mappedBy = "customer")
+    private Balance balance;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Cart> cartList;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orderList;
 
     public Customer(String email, String firstName, String lastName, String userName) {
         this.email = email;
