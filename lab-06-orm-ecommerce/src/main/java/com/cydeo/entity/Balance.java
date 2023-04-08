@@ -14,11 +14,11 @@ public class Balance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double amount;
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-    public Balance(Double amount) {
+    private BigDecimal amount;
+   // @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  //  @JoinColumn(name = "customer_id")
+   // private Customer customer;
+    public Balance(BigDecimal amount) {
         this.amount = amount;
     }
 }
