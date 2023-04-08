@@ -17,7 +17,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String userName;
-@OneToMany(mappedBy = "customerId")
+@OneToMany(mappedBy = "customer")
     private List<Address> addressList;
 
 //private Balance balance;
