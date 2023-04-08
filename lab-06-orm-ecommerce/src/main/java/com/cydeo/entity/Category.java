@@ -14,12 +14,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    private String name;
-   @ManyToMany
-   @JoinTable(name = "product_category_rel",
-           joinColumns = @JoinColumn(name = "p_id"),
-           inverseJoinColumns = @JoinColumn(name = "c_id"))
+   @ManyToMany(mappedBy = "categoryList")
 private List<Product> productList;
-    public Category(String name) {
+
+    public Category(String name, List<Product> productList) {
         this.name = name;
+        this.productList = productList;
     }
 }
