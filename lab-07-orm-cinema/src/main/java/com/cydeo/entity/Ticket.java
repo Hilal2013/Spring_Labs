@@ -24,4 +24,10 @@ public class Ticket {
     private MovieCinema movieCinema;
     @ManyToOne
     private UserAccount userAccount;
+
+    public Ticket(LocalDateTime dateTime, Integer seatNumber, Integer rowNumber) {
+        this.dateTime = dateTime;
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
+    }
 }
