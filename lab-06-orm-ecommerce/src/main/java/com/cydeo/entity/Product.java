@@ -19,6 +19,8 @@ public class Product {
     private Integer remaining_quantity;
     @ManyToMany(mappedBy = "productList")
     private List<Category> categoryList;
+@OneToMany(mappedBy = "product")
+    private List<CartItem> cartItemList;
 
     public Product(String name, Double price, Integer quantity, Integer remaining_quantity) {
         this.name = name;
