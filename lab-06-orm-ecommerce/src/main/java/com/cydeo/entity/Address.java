@@ -17,8 +17,7 @@ public class Address {
     private String street;
     private String zipCode;
    @ManyToOne
-   @JoinColumn(name = "customer_id")
-   //@JoinColumn(name = "id")
+  // @JoinColumn(name = "customer_id")
     private Customer customer;
 
 
