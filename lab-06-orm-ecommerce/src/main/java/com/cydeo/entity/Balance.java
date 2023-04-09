@@ -16,7 +16,6 @@ public class Balance {
     private Long id;
     private BigDecimal amount;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  //  @JoinColumn(name = "customer_id")
     private Customer customer;
     public Balance(BigDecimal amount) {
         this.amount = amount;
