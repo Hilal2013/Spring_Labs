@@ -1,7 +1,9 @@
 package com.cydeo.entity;
 
-import lombok.Data;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,12 +12,9 @@ import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
-@Data
-public class Location {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+@Getter
+@Setter
+public class Location extends BaseEntity {
 
     private String name;
     private String address;
@@ -26,14 +25,5 @@ public class Location {
     private String state;
     private String postalCode;
 
-    public Location(String name, String address, String latitude, String longitude, String country, String city, String state, String postalCode) {
-        this.name = name;
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.country = country;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-    }
+
 }
