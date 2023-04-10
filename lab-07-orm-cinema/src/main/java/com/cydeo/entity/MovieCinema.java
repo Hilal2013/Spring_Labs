@@ -1,30 +1,25 @@
 package com.cydeo.entity;
 
-import lombok.Data;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
-@Data
-public class MovieCinema {
+@Getter
+@Setter
+public class MovieCinema extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime dateTime;
-    @ManyToOne
-    private Movie movie;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Movie movie;//we need here foreignkey//at many side
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
 
-
-
-    public MovieCinema(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
 }
