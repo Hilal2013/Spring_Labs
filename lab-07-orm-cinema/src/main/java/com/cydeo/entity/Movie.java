@@ -3,7 +3,9 @@ package com.cydeo.entity;
 import com.cydeo.enums.State;
 import com.cydeo.enums.Type;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,12 +14,9 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@Data
-public class Movie {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Getter
+@Setter
+public class Movie extends BaseEntity{
 
     private String name;
     @Enumerated(EnumType.STRING)
