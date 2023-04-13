@@ -50,12 +50,15 @@ List<Account> findByCountryOrState(String country, String state);
     // ------------------- Native QUERIES ------------------- //
 
     //Write a native query to read all accounts with an age lower than a specific value
-
+    @Query (value="select * from account_details where age < ?1",nativeQuery = true)
+    List<Account> readAccountAgeLowerValue(Integer age);
 
     //Write a native query to read all accounts that a specific value can be containable in the name, address, country, state city
-
-
+    @Query(value = "select * from account_details where name like %?1% and address like %?1% and country like %?1% and state like %?1% and city like %?1%", nativeQuery = true)
+    List<Account> readAccountContainsNameAddressCountryStateCity(String pattern);
     //Write a native query to read all accounts with an age higher than a specific value
+   @Query (value="select * from account_details where age >?1",nativeQuery = true)
 
+   List<Account> readAccountAllAgeHigher(Integer age);
 
 }
