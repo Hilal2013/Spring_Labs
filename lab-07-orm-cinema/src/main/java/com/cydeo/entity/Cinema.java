@@ -19,5 +19,11 @@ public class Cinema extends BaseEntity{
 
 @ManyToOne(fetch=FetchType.LAZY)
 private Location location;
-
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "name='" + name + '\'' +
+                ", sponsoredName='" + sponsoredName + '\'' +
+                '}';
+    }
 }
