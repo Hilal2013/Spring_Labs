@@ -2,6 +2,7 @@ package com.cydeo.repository;
 
 import com.cydeo.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,26 +20,31 @@ List<Account> findByCountryOrState(String country, String state);
     List<Account> findByAgeLessThanEqual(Integer age);
 
     //Write a derived query to list all accounts with a specific role
-
+    List<Account> findByRole(String role);
 
     //Write a derived query to list all accounts between a range of ages
 
-
+    List<Account> findByAgeBetween(Integer age1, Integer age2);
     //Write a derived query to list all accounts where the beginning of the address contains the keyword
-
+    List<Account> findByAddressContaining(String pattern);
+    List<Account> findByAddressContainingIgnoreCase(String pattern);
 
     //Write a derived query to sort the list of accounts with age
-
+    List<Account> findByOrderByAgeDesc();
 
     // ------------------- JPQL QUERIES ------------------- //
 
     //Write a JPQL query that returns all accounts
-
+    @Query("Select a from Account a")
+    List<Account> getAccount();
 
     //Write a JPQL query to list all admin accounts
-
+    @Query("Select a from Account a where a.role='ADMIN'")
+    List<Account> getAccountAdmin();
 
     //Write a JPQL query to sort all accounts with age
+    @Query("Select a from Account a order by a.age desc ")
+    List<Account> getAccountSortAge();
 
 
     // ------------------- Native QUERIES ------------------- //
