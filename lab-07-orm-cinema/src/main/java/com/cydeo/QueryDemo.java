@@ -29,20 +29,26 @@ public class QueryDemo implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("-----------ACCOUNT-----------");
-        System.out.println(accountRepository.findByCountryOrState("Brooklyn","Kentucky"));
-        System.out.println(accountRepository.findByAgeLessThanEqual(35));
-        System.out.println(accountRepository.findByAgeBetween(28,47));
-        System.out.println(accountRepository.findByAddressContaining("an"));
-        System.out.println(accountRepository.findByAddressContainingIgnoreCase("loch"));
-        System.out.println(accountRepository.findByOrderByAgeDesc());
-        System.out.println(accountRepository.getAccountAdmin());//no admin
-        System.out.println(accountRepository.getAccountSortAge());
-        System.out.println(accountRepository.readAccountAllAgeHigher(35));
-        System.out.println(accountRepository.readAccountAgeLowerValue(35));
-        System.out.println(accountRepository.readAccountContainsNameAddressCountryStateCity("a"));
+     //   System.out.println(accountRepository.findByCountryOrState("Brooklyn","Kentucky"));
+      //  System.out.println(accountRepository.findByAgeLessThanEqual(35));
+      //  System.out.println(accountRepository.findByAgeBetween(28,47));
+      //  System.out.println(accountRepository.findByAddressContaining("an"));
+       // System.out.println(accountRepository.findByAddressContainingIgnoreCase("loch"));
+      //  System.out.println(accountRepository.findByOrderByAgeDesc());
+     //   System.out.println(accountRepository.getAccountAdmin());//no admin
+     //   System.out.println(accountRepository.getAccountSortAge());
+      //  System.out.println(accountRepository.readAccountAllAgeHigher(35));
+      //  System.out.println(accountRepository.readAccountAgeLowerValue(35));
+      //  System.out.println(accountRepository.readAccountContainsNameAddressCountryStateCity("a"));
 
         System.out.println("-----------CINEMA-----------");
-       System.out.println(cinemaRepository.findByName("The Godfather"));
+       System.out.println(cinemaRepository.findByName("Hall 1 - VILLAGE 7"));
+     System.out.println(cinemaRepository.findTop3BySponsoredNameContainingOrderByNameAsc("MySpace"));
+        System.out.println(cinemaRepository.getCinemaCountry("United States"));
+        System.out.println(cinemaRepository.findByLocationCountry("United States"));
+        //System.out.println(cinemaRepository.readCinema("S"));
+        System.out.println(cinemaRepository.readCinemaNameSort());
+        System.out.println(cinemaRepository.readDistinctCinemaSponsoredName());
 
 
 
