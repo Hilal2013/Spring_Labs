@@ -25,5 +25,17 @@ public class Location extends BaseEntity {
     private String state;
     private String postalCode;
 
-
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                '}';
+    }
 }
