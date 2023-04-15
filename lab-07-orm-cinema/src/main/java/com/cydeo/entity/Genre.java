@@ -14,4 +14,10 @@ public class Genre extends BaseEntity {
 
     private String name;
 
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
