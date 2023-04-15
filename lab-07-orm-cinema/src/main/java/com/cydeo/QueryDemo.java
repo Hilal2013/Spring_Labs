@@ -1,11 +1,14 @@
 package com.cydeo;
 
+import com.cydeo.enums.MovieState;
+import com.cydeo.enums.MovieType;
 import com.cydeo.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
+import java.util.List;
 
 
 @Component
@@ -60,6 +63,7 @@ public class QueryDemo implements CommandLineRunner {
         System.out.println("-----------MOVIECINEMA-----------");
         System.out.println(movieCinemaRepository.countByCinemaId(1L));
         System.out.println(movieCinemaRepository.readById(3l));
+     //   System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 2"));
 
 
      //   System.out.println(movieCinemaRepository.findByDateTimeGreaterThan(LocalDateTime.of(2022,12,7,20,00,00)));
@@ -67,8 +71,21 @@ public class QueryDemo implements CommandLineRunner {
       //  System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
 
       //  System.out.println(movieCinemaRepository.countMovies(3l));
+        System.out.println("-----------MOVIE-----------");
+        System.out.println(movieRepository.findByName("The Gentleman"));
+        System.out.println(movieRepository.findByPriceBetweenOrderByPrice(new BigDecimal(15),new BigDecimal(28)));
+     //   System.out.println(movieRepository.findByDuration(List.of(113,135)));
+        System.out.println(movieRepository.findByStateAndType(MovieState.DRAFT, MovieType.REGULAR));
+        System.out.println(movieRepository.getByPriceBetween(new BigDecimal(15),new BigDecimal(28)));
+        System.out.println(movieRepository.getMovieName());
 
-        System.out.println(ticketRepository.countByUserAccountId(3l));
+
+        System.out.println("-----------TICKET-----------");
+
+        System.out.println(ticketRepository.countByUserAccountId(3l));//4
+
+        System.out.println("-----------USER-----------");
+
 
     }
 }
