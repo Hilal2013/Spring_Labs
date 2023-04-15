@@ -64,21 +64,22 @@ public class QueryDemo implements CommandLineRunner {
         System.out.println(movieCinemaRepository.countByCinemaId(1L));
         System.out.println(movieCinemaRepository.readById(3l));
      //   System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 2"));
-
-
      //   System.out.println(movieCinemaRepository.findByDateTimeGreaterThan(LocalDateTime.of(2022,12,7,20,00,00)));
-
       //  System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
-
       //  System.out.println(movieCinemaRepository.countMovies(3l));
-        System.out.println("-----------MOVIE-----------");
-        System.out.println(movieRepository.findByName("The Gentleman"));
-        System.out.println(movieRepository.findByPriceBetweenOrderByPrice(new BigDecimal(15),new BigDecimal(28)));
-     //   System.out.println(movieRepository.findByDuration(List.of(113,135)));
-        System.out.println(movieRepository.findByStateAndType(MovieState.DRAFT, MovieType.REGULAR));
-        System.out.println(movieRepository.getByPriceBetween(new BigDecimal(15),new BigDecimal(28)));
-        System.out.println(movieRepository.getMovieName());
 
+        System.out.println("-----------MOVIE-----------");
+
+   //     System.out.println(movieRepository.findByName("The Gentleman"));
+     //   System.out.println(movieRepository.findByPriceBetweenOrderByPrice(new BigDecimal(15),new BigDecimal(28)));
+     //   System.out.println(movieRepository.findByDuration(List.of(113,135)));
+     //   System.out.println(movieRepository.findByStateAndType(MovieState.DRAFT, MovieType.REGULAR));
+      //  System.out.println(movieRepository.getByPriceBetween(new BigDecimal(15),new BigDecimal(28)));
+     //   System.out.println(movieRepository.getMovieName());
+     //   System.out.println(movieRepository.readMovieName("Tenet"));
+     //   System.out.println(movieRepository.readByPriceBetween(new BigDecimal(15),new BigDecimal(28)));
+      //  System.out.println(movieRepository.getMoviesDurationRange(113,142));
+     //   System.out.println(movieRepository.listTopMovies());
 
         System.out.println("-----------TICKET-----------");
 
