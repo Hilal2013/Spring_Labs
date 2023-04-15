@@ -4,6 +4,9 @@ import com.cydeo.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
+
 
 @Component
 public class QueryDemo implements CommandLineRunner {
@@ -42,15 +45,30 @@ public class QueryDemo implements CommandLineRunner {
       //  System.out.println(accountRepository.readAccountContainsNameAddressCountryStateCity("a"));
 
         System.out.println("-----------CINEMA-----------");
-       System.out.println(cinemaRepository.findByName("Hall 1 - VILLAGE 7"));
-     System.out.println(cinemaRepository.findTop3BySponsoredNameContainingOrderByNameAsc("MySpace"));
-        System.out.println(cinemaRepository.getCinemaCountry("United States"));
-        System.out.println(cinemaRepository.findByLocationCountry("United States"));
+     //  System.out.println(cinemaRepository.findByName("Hall 1 - VILLAGE 7"));
+     //System.out.println(cinemaRepository.findTop3BySponsoredNameContainingOrderByNameAsc("MySpace"));
+     //   System.out.println(cinemaRepository.getCinemaCountry("United States"));
+      //  System.out.println(cinemaRepository.findByLocationCountry("United States"));
         //System.out.println(cinemaRepository.readCinema("S"));
-        System.out.println(cinemaRepository.readCinemaNameSort());
-        System.out.println(cinemaRepository.readDistinctCinemaSponsoredName());
+       // System.out.println(cinemaRepository.readCinemaNameSort());
+       // System.out.println(cinemaRepository.readDistinctCinemaSponsoredName());
+
+        System.out.println("-----------Genre-----------");
+     //   System.out.println(genreRepository.getAllGenres());
+     //   System.out.println(genreRepository.getGenresContainingName("Comedy"));
+
+        System.out.println("-----------MOVIECINEMA-----------");
+        System.out.println(movieCinemaRepository.countByCinemaId(1L));
+        System.out.println(movieCinemaRepository.readById(3l));
 
 
+     //   System.out.println(movieCinemaRepository.findByDateTimeGreaterThan(LocalDateTime.of(2022,12,7,20,00,00)));
+
+      //  System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
+
+      //  System.out.println(movieCinemaRepository.countMovies(3l));
+
+        System.out.println(ticketRepository.countByUserAccountId(3l));
 
     }
 }
