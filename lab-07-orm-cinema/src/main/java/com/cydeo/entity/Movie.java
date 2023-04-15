@@ -35,4 +35,16 @@ public class Movie extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genreList;
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "name='" + name + '\'' +
+                ", state=" + state +
+                ", type=" + type +
+                ", releaseDate=" + releaseDate +
+                ", price=" + price +
+                ", duration=" + duration +
+                ", summary='" + summary + '\'' +
+                '}';
+    }
 }
