@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name="movie_cinema")
 public class MovieCinema extends BaseEntity{
 
     @Column(columnDefinition = "TIMESTAMP")
@@ -21,11 +22,11 @@ public class MovieCinema extends BaseEntity{
     private Movie movie;//we need here foreignkey//at many side
     @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
+
     @Override
     public String toString() {
         return "MovieCinema{" +
                 "dateTime=" + dateTime +
                 '}';
     }
-
 }
