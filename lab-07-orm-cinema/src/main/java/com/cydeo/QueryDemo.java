@@ -61,8 +61,8 @@ public class QueryDemo implements CommandLineRunner {
      //   System.out.println(genreRepository.getGenresContainingName("Comedy"));
 
         System.out.println("-----------MOVIECINEMA-----------");
-        System.out.println(movieCinemaRepository.countByCinemaId(1L));
-        System.out.println(movieCinemaRepository.readById(3l));
+    //    System.out.println(movieCinemaRepository.countByCinemaId(1L));
+   //     System.out.println(movieCinemaRepository.readById(3l));
      //   System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 2"));
      //   System.out.println(movieCinemaRepository.findByDateTimeGreaterThan(LocalDateTime.of(2022,12,7,20,00,00)));
       //  System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
@@ -83,10 +83,18 @@ public class QueryDemo implements CommandLineRunner {
 
         System.out.println("-----------TICKET-----------");
 
-        System.out.println(ticketRepository.countByUserAccountId(3l));//4
+      //  System.out.println(ticketRepository.countByUserAccountId(3l));//4
+      //  System.out.println(ticketRepository.findByUserAccountEmail("'bernard@email.com"));
+      //  System.out.println(ticketRepository.countByMovieCinemaId(1l));//5
+      //  System.out.println(ticketRepository.findByDateTimeBetween(LocalDateTime.of(2020,12,05,20,00),LocalDateTime.of(2020,12,07,21,30)));//5
+   //     System.out.println(ticketRepository.getTicketUser(3l));
+   //     System.out.println(ticketRepository.getTicketsDatesBetween(LocalDateTime.of(2020,12,05,20,00),LocalDateTime.of(2020,12,07,21,30)));
+      //  System.out.println(ticketRepository.countUserAccountId(3l));
 
         System.out.println("-----------USER-----------");
 
-
+        System.out.println(userRepository.findByEmail("johnnie@email.com"));
+        System.out.println(userRepository.findByAccountAgeGreaterThan(35));
+        System.out.println(userRepository.getUserMail("johnnie@email.com"));
     }
 }
