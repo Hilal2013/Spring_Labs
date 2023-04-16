@@ -75,7 +75,7 @@ public class QueryDemo implements CommandLineRunner {
 
    //     System.out.println(movieRepository.findByName("The Gentleman"));
      //   System.out.println(movieRepository.findByPriceBetweenOrderByPrice(new BigDecimal(15),new BigDecimal(28)));
-     //   System.out.println(movieRepository.findByDuration(List.of(113,135)));
+     //   System.out.println(movieRepository.findByDurationIn(List.of(113,135)));
      //   System.out.println(movieRepository.findByStateAndType(MovieState.DRAFT, MovieType.REGULAR));
       //  System.out.println(movieRepository.getByPriceBetween(new BigDecimal(15),new BigDecimal(28)));
      //   System.out.println(movieRepository.getMovieName());
