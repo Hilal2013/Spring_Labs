@@ -4,6 +4,7 @@ import com.cydeo.entity.Account;
 import com.cydeo.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -51,14 +52,18 @@ List<Account> findByCountryOrState(String country, String state);
 
     //Write a native query to read all accounts with an age lower than a specific value
     @Query (value="select * from account_details where age < ?1",nativeQuery = true)
-    List<Account> readAccountAgeLowerValue(Integer age);
+    List<Account> readAccountAgeLowerValue(@Param("age") Integer age);
 
     //Write a native query to read all accounts that a specific value can be containable in the name, address, country, state city
-    @Query(value = "select * from account_details where name like %?1% and address like %?1% and country like %?1% and state like %?1% and city like %?1%", nativeQuery = true)
-    List<Account> readAccountContainsNameAddressCountryStateCity(String pattern);
+    @Query(value = "SELECT * FROM account_details WHERE name ILIKE concat('%',?1,'%')" +
+            "OR address ILIKE concat('%',?1,'%')" +
+            "OR country ILIKE concat('%',?1,'%')" +
+            "OR state ILIKE  concat('%',?1,'%')" +
+            "OR city ILIKE  concat('%',?1,'%')",nativeQuery = true)
+    List<Account> readAccountContainsNameAddressCountryStateCity(@Param("pattern") String pattern);
 
     //Write a native query to read all accounts with an age higher than a specific value
    @Query (value="select * from account_details where age >?1",nativeQuery = true)
-   List<Account> readAccountAllAgeHigher(Integer age);
+   List<Account> readAccountAllAgeHigher(@Param("age")Integer age);
 
 }
