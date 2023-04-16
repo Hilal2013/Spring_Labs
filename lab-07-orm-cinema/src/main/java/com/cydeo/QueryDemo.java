@@ -38,8 +38,7 @@ public class QueryDemo implements CommandLineRunner {
      //   System.out.println(accountRepository.findByCountryOrState("Brooklyn","Kentucky"));
       //  System.out.println(accountRepository.findByAgeLessThanEqual(35));
       //  System.out.println(accountRepository.findByAgeBetween(28,47));
-      //  System.out.println(accountRepository.findByAddressContaining("an"));
-       // System.out.println(accountRepository.findByAddressContainingIgnoreCase("loch"));
+      //  System.out.println(accountRepository.findByAddressStartsWith("262"));
       //  System.out.println(accountRepository.findByOrderByAgeDesc());
      //   System.out.println(accountRepository.getAccountAdmin());//no admin
      //   System.out.println(accountRepository.getAccountSortAge());
@@ -53,8 +52,10 @@ public class QueryDemo implements CommandLineRunner {
      //   System.out.println(cinemaRepository.getCinemaCountry("United States"));
       //  System.out.println(cinemaRepository.findByLocationCountry("United States"));
         //System.out.println(cinemaRepository.readCinema("S"));
+      //  System.out.println(cinemaRepository.readCinemaLocationCountry("United States"));
+      //  System.out.println(cinemaRepository.readCinemaNameOrSponsoredName("S"));
        // System.out.println(cinemaRepository.readCinemaNameSort());
-       // System.out.println(cinemaRepository.readDistinctCinemaSponsoredName());
+     //   System.out.println(cinemaRepository.readDistinctCinemaSponsoredName("MySpace"));
 
         System.out.println("-----------Genre-----------");
      //   System.out.println(genreRepository.getAllGenres());
@@ -66,7 +67,8 @@ public class QueryDemo implements CommandLineRunner {
      //   System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 2"));
      //   System.out.println(movieCinemaRepository.findByDateTimeGreaterThan(LocalDateTime.of(2022,12,7,20,00,00)));
       //  System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
-      //  System.out.println(movieCinemaRepository.countMovies(3l));
+     //   System.out.println(movieCinemaRepository.countMovies(3l));//1
+    //    System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 25"));
 
         System.out.println("-----------MOVIE-----------");
 
@@ -93,8 +95,8 @@ public class QueryDemo implements CommandLineRunner {
 
         System.out.println("-----------USER-----------");
 
-        System.out.println(userRepository.findByEmail("johnnie@email.com"));
-        System.out.println(userRepository.findByAccountAgeGreaterThan(35));
-        System.out.println(userRepository.getUserMail("johnnie@email.com"));
+     //   System.out.println(userRepository.findByEmail("johnnie@email.com"));
+     //   System.out.println(userRepository.findByAccountAgeGreaterThan(35));
+     //   System.out.println(userRepository.getUserMail("johnnie@email.com"));
     }
 }
