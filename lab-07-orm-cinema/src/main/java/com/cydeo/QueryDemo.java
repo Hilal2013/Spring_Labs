@@ -66,7 +66,8 @@ public class QueryDemo implements CommandLineRunner {
    //     System.out.println(movieCinemaRepository.readById(3l));
      //   System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 2"));
      //   System.out.println(movieCinemaRepository.findByDateTimeGreaterThan(LocalDateTime.of(2022,12,7,20,00,00)));
-      //  System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
+     //   System.out.println(movieCinemaRepository.findTop3ByMoviePrice());
+     //   System.out.println(movieCinemaRepository.findTop3ByOrderByMoviePriceDesc());
      //   System.out.println(movieCinemaRepository.countMovies(3l));//1
     //    System.out.println(movieCinemaRepository.getAllMoviesLocation("AMC Empire 25"));
 
