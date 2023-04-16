@@ -21,9 +21,6 @@ public class Order {
     @ManyToOne
     private Customer customer;
     @OneToOne
-    @JoinColumn(name="payment_id")
     private Payment payment;
-    public Order(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+
 }
