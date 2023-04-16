@@ -39,7 +39,7 @@ public interface CinemaRepository extends JpaRepository<Cinema, Long> {
 
     //Write a native query to read all cinemas by location country
 
-    @Query (value="select * from cinema c join location l on c.id=l.id where l.country=?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM cinema c JOIN location l ON c.location_id = l.id WHERE l.country = ?1",nativeQuery = true)
     List<Cinema> readCinemaLocationCountry(@Param("country") String country);
     //Write a native query to read all cinemas by name or sponsored name contains a specific pattern
     @Query (value="select * from cinema where name ILIKE concat('%',?1,'%') " +
