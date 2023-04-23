@@ -21,7 +21,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByUserAccountEmail(String email);
 
     //Write a derived query to count how many tickets are sold for a specific movie
-    Integer countByMovieCinemaMovieNem(String name);
+    Integer countByMovieCinemaMovieName(String name);
 
     //Write a derived query to list all tickets between a range of dates
     List<Ticket> findByDateTimeBetween(LocalDateTime start, LocalDateTime end);
