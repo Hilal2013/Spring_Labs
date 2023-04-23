@@ -42,8 +42,8 @@ List<User>  findByAccountNameContaining(String pattern);
     // ------------------- Native QUERIES ------------------- //
 
     //Write a native query that returns all users that contain a specific name?
-@Query(value="select * from user_account where username ilike concat('%',?1,'%')",nativeQuery = true)
-List<User> returnUsersContainName(@Param("pattern")String pattern);
+@Query(value="select * from user_account u join account_details ad on u.account_details_id=ad.id where where ad.name ilike concat('%',?1,'%')",nativeQuery = true)
+List<User> returnUsersContainName(@Param("name")String name);
     //Write a native query that returns all users?
     @Query(value="select * from user_account ",nativeQuery = true)
     List<User> returnUsers();
