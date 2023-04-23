@@ -1,0 +1,1 @@
+Alter table ticket add column type int not null default 0;
