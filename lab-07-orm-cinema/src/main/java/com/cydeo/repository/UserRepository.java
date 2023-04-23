@@ -12,16 +12,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // ------------------- DERIVED QUERIES ------------------- //
 
     //Write a derived query to read a user with an email?
-
     User findByEmail(String email);
     //Write a derived query to read a user with a username?
     User findByUsername(String userName);
 
     //Write a derived query to list all users that contain a specific name?
-List<User>  findByUsernameContaining(String pattern);
+List<User>  findByAccountNameContaining(String pattern);
 
     //Write a derived query to list all users that contain a specific name in the ignore case mode?
-    List<User>  findByUsernameContainingIgnoreCase(String pattern);
+    List<User>  findByAccountNameContainingIgnoreCase(String pattern);
 
 
     //Write a derived query to list all users with an age greater than a specified age?
