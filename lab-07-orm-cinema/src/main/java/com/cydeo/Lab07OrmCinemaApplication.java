@@ -15,8 +15,8 @@ public class Lab07OrmCinemaApplication {
     public static void main(String[] args) {
         SpringApplication.run(Lab07OrmCinemaApplication.class, args);
     }
-	@Bean
-	public MigrateResult migrateResult(DataSource dataSource){
-		return Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
-	}
+//	@Bean
+//	public MigrateResult migrateResult(DataSource dataSource){
+//		return Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
+//	}
 }
