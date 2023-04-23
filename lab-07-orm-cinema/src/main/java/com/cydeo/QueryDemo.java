@@ -93,7 +93,7 @@ public class QueryDemo implements CommandLineRunner {
    //     System.out.println(ticketRepository.getTicketUser(3l));
    //     System.out.println(ticketRepository.getTicketsDatesBetween(LocalDateTime.of(2020,12,05,20,00),LocalDateTime.of(2020,12,07,21,30)));
       //  System.out.println(ticketRepository.countUserAccountId(3l));
-        System.out.println(ticketRepository.retrieveAllBySearchCriteria("a"));
+    //    System.out.println(ticketRepository.retrieveAllBySearchCriteria("a"));
         System.out.println("-----------USER-----------");
 
      //   System.out.println(userRepository.findByEmail("johnnie@email.com"));
