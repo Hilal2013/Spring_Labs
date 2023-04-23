@@ -21,7 +21,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByUserAccountEmail(String email);
 
     //Write a derived query to count how many tickets are sold for a specific movie
-    int countByMovieCinemaId(Long id);
+    Integer countByMovieCinemaMovieNem(String name);
 
     //Write a derived query to list all tickets between a range of dates
     List<Ticket> findByDateTimeBetween(LocalDateTime start, LocalDateTime end);
@@ -47,7 +47,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     //Write a native query to distinct all tickets by movie name
 
-@Query(value="select distinct m.name  from ticket t join movie_cinema mc on t.movie_cinema_id=mc.id join movie m on  ",nativeQuery = true)
+@Query(value="select distinct (m.name)  from ticket t join movie_cinema mc on t.movie_cinema_id=mc.id join movie m on  ",nativeQuery = true)
     List<Ticket> distinctTicketsMovieName();
     //Write a native query to find all tickets by user email
     @Query(value="select * from ticket t join user_account u on t.user_acoount_id=u.id where u.username=?1",nativeQuery = true)
@@ -58,8 +58,12 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> getAllTickets();
     //Write a native query to list all tickets where a specific value should be containable in the username or account name or movie name
 
-    @Query(value=" select * from ticket t join user_account u on t.user_acoount_id=u.id " +
-            "join account_details a on u.accoun_details_id=a.id join movie_cinema mc on t.movie_cinema_id=mc.id join movie m on mc.movie_id=m.id where u.username ILIKE concat('%',?1,'%')" +
-            "OR a.name account_details OR m.name account_details ILIKE concat('%',?1,'%') ",nativeQuery = true)
-    List<Ticket> allTicketsContainsValue(@Param("pattern") String pattern);
+    @Query(value = "SELECT * FROM ticket t JOIN user_account ua ON t.user_account_id = ua.id " +
+            "JOIN account_details ad ON ad.id = ua.account_details_id " +
+            "JOIN movie_cinema mc ON mc.id = t.movie_cinema_id " +
+            "JOIN movie m ON mc.movie_id = m.id " +
+            "WHERE ua.username ILIKE concat('%',?1,'%') " +
+            "OR ad.name ILIKE concat('%',?1,'%') " +
+            "OR m.name ILIKE concat('%',?1,'%') ",nativeQuery = true)
+    List<Ticket> retrieveAllBySearchCriteria(@Param("searchCriteria") String searchCriteria);
 }
