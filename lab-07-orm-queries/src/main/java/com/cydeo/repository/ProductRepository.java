@@ -30,15 +30,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> retrieveProductListGreaterThanPriceAndLowerThanRemainingQuantity(@Param("price") BigDecimal price, @Param("remainingQuantity")Integer remainingQuantity);
 
     //Write a native query to get all product by specific categoryId
-    //@Query(value = "select * from product p join product_category_rel pl on pl.p_id = p.id where pl.c_id = ?1", nativeQuery = true)
-
+    @Query(value = "select * from product p join product_category_rel pl on pl.p_id = p.id where pl.c_id = ?1", nativeQuery = true)
     List<Product> retrieveProductListByCategory(@Param("categoryId")Long categoryId);
 
 
     //Write a native query to get all product by specific categoryId and price greater than specific amount
 
-  //  @Query(value = "select * from product p join product_category_rel pl on pl.p_id = p.id where pl.c_id in(?1) " +
- //           " p.price > ?2", nativeQuery = true)
+    @Query(value = "select * from product p join product_category_rel pl on pl.p_id = p.id where pl.c_id in(?1) " +
+           " p.price > ?2", nativeQuery = true)
     List<Product> retrieveProductListByCategory(@Param("categoryId")List<Long> categoryId,@Param("price") BigDecimal price);
 
 }
