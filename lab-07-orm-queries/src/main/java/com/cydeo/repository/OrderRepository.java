@@ -25,15 +25,13 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     //Write a native query to get all orders by specific product name
 
     @Query(value = "select * from orders o join cart c on o.cart_id=c.id " +
-            "join car_item ci on c.cart_item_id=ci.id " +
-            //"JOIN cart_item ci ON ci.cart_id = c.id " + ??
+            "JOIN cart_item ci ON ci.cart_id = c.id " +
             "join product p on ci.product_id=p.id where p.name=?1  ",nativeQuery = true)
     List<Order> retrieveAllOrdersByProductName(@Param("name") String name);
 
     //Write a native query to get all orders by specific categoryId
     @Query(value = "SELECT * FROM orders o JOIN cart c ON o.cart_id = c.id " +
-            "JOIN cart_item ci ON  c.cart_item_id=ci.id " +
-            //"JOIN cart_item ci ON ci.cart_id = c.id " +???
+            "JOIN cart_item ci ON ci.cart_id = c.id " +
             "JOIN product p ON ci.product_id= p.id " +
             "JOIN category ca ON  p.c_id=ca.id  WHERE ca.id = ?1", nativeQuery = true)
     List<Order> retrieveAllOrdersByCategoryId(@Param("id") Long id);
