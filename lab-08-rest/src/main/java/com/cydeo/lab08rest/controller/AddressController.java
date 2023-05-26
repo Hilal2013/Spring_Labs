@@ -39,7 +39,7 @@ public class AddressController {
 
         return ResponseEntity.ok(new ResponseWrapper("Address Saved",  addressService.save(address), HttpStatus.OK));
     }
-
+@PutMapping
     public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO address) {
 
         addressService.update(address);
