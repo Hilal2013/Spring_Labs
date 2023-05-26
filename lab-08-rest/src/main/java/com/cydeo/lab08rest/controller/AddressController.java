@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/address")
 public class AddressController {
     private final AddressService addressService;
-    private final CustomerService customerService;
 
-    public AddressController(AddressService addressService, CustomerService customerService) {
+
+    public AddressController(AddressService addressService) {
         this.addressService = addressService;
-        this.customerService = customerService;
+
     }
 
     @GetMapping
