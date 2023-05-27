@@ -3,7 +3,7 @@ package com.cydeo.lab08rest.controller;
 import com.cydeo.lab08rest.dto.AddressDTO;
 import com.cydeo.lab08rest.model.ResponseWrapper;
 import com.cydeo.lab08rest.service.AddressService;
-import com.cydeo.lab08rest.service.CustomerService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +34,13 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper> createAddress(@RequestBody AddressDTO address) {
+    public ResponseEntity<ResponseWrapper> createAddress(@RequestBody AddressDTO address ) throws Exception {
 
 
         return ResponseEntity.ok(new ResponseWrapper("Address Saved",  addressService.save(address), HttpStatus.OK));
     }
 @PutMapping
-    public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO address) {
+    public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO address) throws Exception {
 
         addressService.update(address);
         return ResponseEntity.noContent().build();
@@ -57,7 +57,7 @@ public class AddressController {
     @GetMapping("/customer/{customerId}/name/{name}")
     public ResponseEntity<ResponseWrapper> getAddressListByCustomerId(@PathVariable("id") Long customerId, @PathVariable("name") String name) {
 
-        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressCustomerAndName(customerId, name), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressCustomerIdAndName(customerId, name), HttpStatus.OK));
 
     }
 
