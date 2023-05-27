@@ -9,8 +9,8 @@ import java.util.List;
 public interface AddressService {
 List<AddressDTO> findAllAddress();
     List<AddressDTO> findAddressCustomerId(Long id);
-    List<AddressDTO> findAddressCustomerAndName(Long id,String name);
+    AddressDTO findAddressCustomerIdAndName(Long id,String name);
     List<AddressDTO> findAddressStartingWith(String keyword);
-    AddressDTO save(AddressDTO address);
-    void update(AddressDTO address);
+    AddressDTO save(AddressDTO address) throws Exception;
+    void update(AddressDTO address) throws Exception;
 }
