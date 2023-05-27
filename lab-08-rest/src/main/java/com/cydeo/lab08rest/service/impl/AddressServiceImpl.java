@@ -9,6 +9,7 @@ import com.cydeo.lab08rest.service.AddressService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,30 +38,43 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<AddressDTO> findAddressCustomerAndName(Long id, String name) {
-        return addressRepository.findAllByCustomerIdAndName(id, name).stream()
-                .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
-                .collect(Collectors.toList());
+    public AddressDTO findAddressCustomerIdAndName(Long id, String name) {
+       return mapperUtil.convert(addressRepository.findAllByCustomerIdAndName(id,name),new AddressDTO());
+//        return addressRepository.findAllByCustomerIdAndName(id, name).stream()
+//                .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
+//                .collect(Collectors.toList());
     }
 
     @Override
     public List<AddressDTO> findAddressStartingWith(String keyword) {
-        return addressRepository.findAllByStreetStartingWith(keyword).stream()
+
+
+       return addressRepository.findAllByStreetStartingWith(keyword).stream()
                 .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public AddressDTO save(AddressDTO address) {
-        addressRepository.save(mapperUtil.convert(address, new Address()));
-        return address;
+    public AddressDTO save(AddressDTO addressDTO) throws Exception {
+        Optional<Address> foundAddress = addressRepository.findById(addressDTO.getId());
+
+        if (foundAddress.isPresent()) {
+            throw new Exception("Address Already Exists!");
+        }
+        addressRepository.save(mapperUtil.convert(addressDTO, new Address()));
+        return addressDTO;
     }
 
     @Override
-    public void update(AddressDTO addressDTO) {
+    public void update(AddressDTO addressDTO) throws Exception {
+
+        addressRepository.findById(addressDTO.getId())
+                  .orElseThrow(() -> new Exception("No Address Found!"));
+
         Address address = mapperUtil.convert(addressDTO, new Address());
-        address.setName(address.getName());
+
         addressRepository.save(address);
+
     }
 
 
