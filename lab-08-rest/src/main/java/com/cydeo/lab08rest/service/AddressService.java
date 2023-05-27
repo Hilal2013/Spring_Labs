@@ -11,6 +11,6 @@ List<AddressDTO> findAllAddress();
     List<AddressDTO> findAddressCustomerId(Long id);
     AddressDTO findAddressCustomerIdAndName(Long id,String name);
     List<AddressDTO> findAddressStartingWith(String keyword);
-    AddressDTO save(AddressDTO address) throws Exception;
-    void update(AddressDTO address) throws Exception;
+    AddressDTO save(AddressDTO address) ;
+    void update(AddressDTO address) ;
 }
