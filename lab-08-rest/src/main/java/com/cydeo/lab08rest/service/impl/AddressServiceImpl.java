@@ -65,13 +65,13 @@ public class AddressServiceImpl implements AddressService {
     public void update(AddressDTO addressDTO) {
 
         Address address = mapperUtil.convert(addressDTO, new Address());
-        addressRepository.findById(address.getId()).ifPresent(setAddress -> {
-    setAddress.setName(address.getName());
-            setAddress.setStreet(address.getStreet());
-            setAddress.setZipCode(address.getZipCode());
-            setAddress.setId(address.getId());
-            setAddress.setCustomer(address.getCustomer());
-            addressRepository.save(setAddress);
+        addressRepository.findById(address.getId()).ifPresent(renewAddress -> {
+    renewAddress.setName(address.getName());
+            renewAddress.setStreet(address.getStreet());
+            renewAddress.setZipCode(address.getZipCode());
+            renewAddress.setId(address.getId());
+            renewAddress.setCustomer(address.getCustomer());
+            addressRepository.save(renewAddress);
         });
 
 
