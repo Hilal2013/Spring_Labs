@@ -25,14 +25,14 @@ private final DiscountService discountService;
     @GetMapping("/{name}")
     public  ResponseEntity<ResponseWrapper> getDiscountListByName(@PathVariable("name") String email){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", discountService.findAllDiscountByName(email), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Discounts Retrieved", discountService.findAllDiscountByName(email), HttpStatus.OK));
 
     }
 
     @PostMapping
     public  ResponseEntity<ResponseWrapper> createDiscount(@RequestBody DiscountDTO discountDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Saved", discountService.save(discountDTO), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Discount Saved", discountService.save(discountDTO), HttpStatus.OK));
 
     }
 
