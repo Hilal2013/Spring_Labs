@@ -37,9 +37,9 @@ public class CustomerController {
     }
 
     @PutMapping
-    public  ResponseEntity<Void> updateCustomer(@RequestBody CustomerDTO customer){
+    public  ResponseEntity<Void> updateCustomer(@RequestBody CustomerDTO customer)  {
 customerService.update(customer);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
