@@ -39,7 +39,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO findAddressCustomerIdAndName(Long id, String name) {
-       return mapperUtil.convert(addressRepository.findAllByCustomerIdAndName(id,name),new AddressDTO());
+        return mapperUtil.convert(addressRepository.findAllByCustomerIdAndName(id, name), new AddressDTO());
 //        return addressRepository.findAllByCustomerIdAndName(id, name).stream()
 //                .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
 //                .collect(Collectors.toList());
@@ -49,31 +49,31 @@ public class AddressServiceImpl implements AddressService {
     public List<AddressDTO> findAddressStartingWith(String keyword) {
 
 
-       return addressRepository.findAllByStreetStartingWith(keyword).stream()
+        return addressRepository.findAllByStreetStartingWith(keyword).stream()
                 .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public AddressDTO save(AddressDTO addressDTO) throws Exception {
-        Optional<Address> foundAddress = addressRepository.findById(addressDTO.getId());
+    public AddressDTO save(AddressDTO addressDTO) {
 
-        if (foundAddress.isPresent()) {
-            throw new Exception("Address Already Exists!");
-        }
         addressRepository.save(mapperUtil.convert(addressDTO, new Address()));
         return addressDTO;
     }
 
     @Override
-    public void update(AddressDTO addressDTO) throws Exception {
-
-        addressRepository.findById(addressDTO.getId())
-                  .orElseThrow(() -> new Exception("No Address Found!"));
+    public void update(AddressDTO addressDTO) {
 
         Address address = mapperUtil.convert(addressDTO, new Address());
+        addressRepository.findById(address.getId()).ifPresent(setAddress -> {
+    setAddress.setName(address.getName());
+            setAddress.setStreet(address.getStreet());
+            setAddress.setZipCode(address.getZipCode());
+            setAddress.setId(address.getId());
+            setAddress.setCustomer(address.getCustomer());
+            addressRepository.save(setAddress);
+        });
 
-        addressRepository.save(address);
 
     }
 
