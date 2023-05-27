@@ -34,16 +34,16 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper> createAddress(@RequestBody AddressDTO address ) throws Exception {
+    public ResponseEntity<ResponseWrapper> createAddress(@RequestBody AddressDTO address )  {
 
 
         return ResponseEntity.ok(new ResponseWrapper("Address Saved",  addressService.save(address), HttpStatus.OK));
     }
 @PutMapping
-    public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO address) throws Exception {
+    public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO address)  {
 
         addressService.update(address);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 
