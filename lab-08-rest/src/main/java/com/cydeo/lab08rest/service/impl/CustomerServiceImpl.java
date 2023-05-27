@@ -36,22 +36,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO save(CustomerDTO customer) {
-    customerRepository.save(mapperUtil.convert(customer,new Customer()));
-        return customer ;
+    public CustomerDTO save(CustomerDTO customerDTO) {
+    customerRepository.save(mapperUtil.convert(customerDTO,new Customer()));
+        return customerDTO ;
     }
 
     @Override
     public void update(CustomerDTO customerDTO)  {
         Customer customer = mapperUtil.convert(customerDTO, new Customer());
         customerRepository.findById(customer.getId())
-                .ifPresent(setCustomer->{setCustomer.setFirstName(customer.getFirstName());
-                    setCustomer.setLastName(customer.getLastName());
-                    setCustomer.setUserName(customer.getUserName());
-                    setCustomer.setEmail(customer.getEmail());
-                    setCustomer.setAddressList(customer.getAddressList());
+                .ifPresent(renewCustomer->{renewCustomer.setFirstName(customer.getFirstName());
+                    renewCustomer.setLastName(customer.getLastName());
+                    renewCustomer.setUserName(customer.getUserName());
+                    renewCustomer.setEmail(customer.getEmail());
+                    renewCustomer.setAddressList(customer.getAddressList());
 
-                    customerRepository.save(setCustomer);
+                    customerRepository.save(renewCustomer);
                 });
 
 
