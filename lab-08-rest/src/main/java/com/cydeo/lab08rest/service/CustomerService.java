@@ -12,5 +12,5 @@ public interface CustomerService {
     CustomerDTO findCustomerEmail(String email);
 
     CustomerDTO save(CustomerDTO customer);
-    void update(CustomerDTO customer);
+    void update(CustomerDTO customer) ;
 }
