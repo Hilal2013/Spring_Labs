@@ -31,6 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO findCustomerEmail(String email) {
+
         return mapperUtil.convert(customerRepository.retrieveByCustomerEmail(email),new CustomerDTO());
     }
 
@@ -41,10 +42,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void update(CustomerDTO customerDTO) {
+    public void update(CustomerDTO customerDTO)  {
         Customer customer = mapperUtil.convert(customerDTO, new Customer());
+        customerRepository.findById(customer.getId())
+                .ifPresent(setCustomer->{setCustomer.setFirstName(customer.getFirstName());
+                    setCustomer.setLastName(customer.getLastName());
+                    setCustomer.setUserName(customer.getUserName());
+                    setCustomer.setEmail(customer.getEmail());
+                    setCustomer.setAddressList(customer.getAddressList());
+
+                    customerRepository.save(setCustomer);
+                });
 
 
-        customerRepository.save(customer);
+
     }
 }
