@@ -14,6 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //Write a derived query to get top 3 product order by price desc
     List<Product> findTop3ByOrderByPriceDesc();
 
+    List<Product> findByPrice(BigDecimal price);
     //Write a derived query to get product by specific name
     Product findFirstByName(String name);
 
@@ -25,6 +26,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //Write a derived query to get all product by quantity greater than or equal specific count
     List<Product> findAllByQuantityIsGreaterThanEqual(int quantity);
+    List<Product> findByPriceAndQuantity(BigDecimal price,Integer quantity);
+
 
     //Write a native query to get all product by price greater than specific amount and quantity lower than specific count
     @Query(value = "select * from product p where p.price > ?1 and p.remaining_quantity < ?2", nativeQuery = true)
