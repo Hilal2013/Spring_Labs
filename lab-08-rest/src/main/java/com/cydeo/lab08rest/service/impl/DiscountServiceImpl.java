@@ -33,7 +33,7 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public List<DiscountDTO> findAllDiscountByName(String name) {
-        return discountRepository.findAllByDiscountAndName(name).stream()
+        return discountRepository.findAllByName(name).stream()
                 .map(entity -> mapperUtil.convert(entity, new DiscountDTO()))
                 .collect(Collectors.toList());
     }
