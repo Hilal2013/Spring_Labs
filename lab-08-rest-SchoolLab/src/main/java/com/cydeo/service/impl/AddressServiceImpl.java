@@ -40,7 +40,10 @@ public class AddressServiceImpl implements AddressService {
     public AddressDTO findById(Long id) throws Exception {
         Address foundAddress = addressRepository.findById(id)
                 .orElseThrow(() -> new Exception("No Address Found!"));
-        return mapperUtil.convert(foundAddress, new AddressDTO());
+        AddressDTO addressDTO = mapperUtil.convert(foundAddress, new AddressDTO());
+      //  addressDTO.setCurrentTemperature();
+        return addressDTO;
+
     }
 
     @Override
