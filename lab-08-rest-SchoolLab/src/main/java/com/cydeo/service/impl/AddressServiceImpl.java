@@ -1,10 +1,12 @@
 package com.cydeo.service.impl;
 
+import com.cydeo.client.WeatherClient;
 import com.cydeo.dto.AddressDTO;
 import com.cydeo.entity.Address;
 import com.cydeo.repository.AddressRepository;
 import com.cydeo.service.AddressService;
 import com.cydeo.util.MapperUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +18,14 @@ public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
     private final MapperUtil mapperUtil;
+    private final WeatherClient weatherClient;
+    @Value("${access_key}")
+    private String accessKey;
 
-    public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil) {
+    public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil, WeatherClient weatherClient) {
         this.addressRepository = addressRepository;
         this.mapperUtil = mapperUtil;
+        this.weatherClient = weatherClient;
     }
 
     @Override
