@@ -22,14 +22,14 @@ public class AddressController {
     @GetMapping
     public ResponseEntity<ResponseWrapper> getAddressList() {
 
-        return ResponseEntity.ok(new ResponseWrapper("AddressList Retrieved", addressService.findAllAddress(), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("AddressList Retrieved", addressService.findAllAddress()));
 
     }
 
     @GetMapping("/customer/{id}")
     public ResponseEntity<ResponseWrapper> getAddressListByCustomerId(@PathVariable("id") Long customerId) {
 
-        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressCustomerId(customerId), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressCustomerId(customerId)));
 
     }
 
@@ -37,7 +37,7 @@ public class AddressController {
     public ResponseEntity<ResponseWrapper> createAddress(@RequestBody AddressDTO address )  {
 
 
-        return ResponseEntity.ok(new ResponseWrapper("Address Saved",  addressService.save(address), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Address Saved",  addressService.save(address)));
     }
 @PutMapping
     public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO address)  {
@@ -50,14 +50,14 @@ public class AddressController {
     @GetMapping("/startsWith/{address}")
     public ResponseEntity<ResponseWrapper> getAddressListByStartsWithAddress(@PathVariable("address") String keyword) {
 
-        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressStartingWith(keyword), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressStartingWith(keyword)));
 
     }
 
     @GetMapping("/customer/{customerId}/name/{name}")
     public ResponseEntity<ResponseWrapper> getAddressListByCustomerId(@PathVariable("id") Long customerId, @PathVariable("name") String name) {
 
-        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressCustomerIdAndName(customerId, name), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Addresses Retrieved", addressService.findAddressCustomerIdAndName(customerId, name)));
 
     }
 

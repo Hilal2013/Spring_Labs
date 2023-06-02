@@ -18,27 +18,27 @@ private final OrderService orderService;
     }
     @GetMapping
     public ResponseEntity<ResponseWrapper> getOrderList(){
-        return ResponseEntity.ok(new ResponseWrapper("OrderList Retrieved", orderService.findAllOrder(), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("OrderList Retrieved", orderService.findAllOrder()));
 
     }
     @GetMapping("/email/{email}")
     public  ResponseEntity<ResponseWrapper> getOrderListByEmail(@PathVariable("email") String email){
 
-        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByCustomerEmail(email), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByCustomerEmail(email)));
 
     }
 
     @GetMapping("/paymentMethod/{paymentMethod}")
     public  ResponseEntity<ResponseWrapper> getOrderListByPaymentMethod(@PathVariable("paymentMethod") PaymentMethod paymentMethod){
 
-        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByPayment_PaymentMethod(paymentMethod), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByPayment_PaymentMethod(paymentMethod)));
 
     }
 
     @PostMapping
     public  ResponseEntity<ResponseWrapper> createOrder(@RequestBody OrderDTO orderDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("Order Saved",  orderService.save(orderDTO), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Order Saved",  orderService.save(orderDTO)));
 
     }
 

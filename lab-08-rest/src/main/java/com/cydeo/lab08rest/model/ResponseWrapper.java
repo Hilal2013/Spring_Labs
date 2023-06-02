@@ -17,16 +17,17 @@ public class ResponseWrapper {
     private Integer code;
     private Object data;
 
-    public ResponseWrapper(String message, Object data, HttpStatus httpStatus) {
+    public ResponseWrapper(String message, Object data) {
         this.success = true;
         this.message = message;
-        this.code = httpStatus.value();
+        this.code = HttpStatus.OK.value();
         this.data = data;
     }
 
-    public ResponseWrapper(String message, HttpStatus httpStatus) {
-        this.message = message;
-        this.code = httpStatus.value();
+    public ResponseWrapper(String message) {
         this.success = true;
+        this.message = message;
+        this.code = HttpStatus.OK.value();
+
     }
 }
