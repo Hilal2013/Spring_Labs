@@ -23,9 +23,9 @@ private final DiscountService discountService;
 
     }
     @GetMapping("/{name}")
-    public  ResponseEntity<ResponseWrapper> getDiscountListByName(@PathVariable("name") String email){
+    public  ResponseEntity<ResponseWrapper> getDiscountListByName(@PathVariable("name") String name){
 
-        return ResponseEntity.ok(new ResponseWrapper("Discounts Retrieved", discountService.findAllDiscountByName(email)));
+        return ResponseEntity.ok(new ResponseWrapper("Discounts Retrieved", discountService.findAllDiscountByName(name)));
 
     }
 

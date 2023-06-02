@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     public void update(OrderDTO orderDTO) {
         Order order = mapperUtil.convert(orderDTO, new Order());
         orderRepository.findById(order.getId()).ifPresent(renewOrder -> {
-          //  renewOrder.setId(order.getId());
+           renewOrder.setId(order.getId());
             renewOrder.setPaidPrice(order.getPaidPrice());
             renewOrder.setTotalPrice(order.getTotalPrice());
             renewOrder.setCustomer(order.getCustomer());

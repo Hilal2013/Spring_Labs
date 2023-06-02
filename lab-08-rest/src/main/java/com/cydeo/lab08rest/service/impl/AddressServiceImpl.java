@@ -1,6 +1,7 @@
 package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.AddressDTO;
+import com.cydeo.lab08rest.dto.CustomerDTO;
 import com.cydeo.lab08rest.entity.Address;
 import com.cydeo.lab08rest.entity.Customer;
 import com.cydeo.lab08rest.mapper.MapperUtil;
@@ -38,11 +39,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public AddressDTO findAddressCustomerIdAndName(Long id, String name) {
-        return mapperUtil.convert(addressRepository.findAllByCustomerIdAndName(id, name), new AddressDTO());
-//        return addressRepository.findAllByCustomerIdAndName(id, name).stream()
-//                .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
-//                .collect(Collectors.toList());
+    public List<AddressDTO> findAllByCustomerIdAndName(Long id,String name){
+       // return mapperUtil.convert(addressRepository.findAllByCustomerIdAndName(id, name), new AddressDTO());
+        return addressRepository.findAllByCustomerIdAndName(id,name).stream()
+                .map(entity -> mapperUtil.convert(entity, new AddressDTO()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class AddressServiceImpl implements AddressService {
             renewAddress.setStreet(address.getStreet());
             renewAddress.setZipCode(address.getZipCode());
             renewAddress.setId(address.getId());
-            renewAddress.setCustomer(address.getCustomer());
+           renewAddress.setCustomer(address.getCustomer());
             addressRepository.save(renewAddress);
         });
 

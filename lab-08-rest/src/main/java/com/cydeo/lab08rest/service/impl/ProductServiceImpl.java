@@ -91,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
                     renewProduct.setQuantity(product.getQuantity());
                     renewProduct.setRemainingQuantity(product.getRemainingQuantity());
                     renewProduct.setId(product.getId());
-                  //  renewProduct.setCategoryList(product.getCategoryList());
+                   renewProduct.setCategoryList(product.getCategoryList());
                     productRepository.save(renewProduct);
                 });
     }
