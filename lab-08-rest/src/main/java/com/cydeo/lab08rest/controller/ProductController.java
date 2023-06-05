@@ -1,6 +1,7 @@
 package com.cydeo.lab08rest.controller;
 
 import com.cydeo.lab08rest.dto.ProductDTO;
+import com.cydeo.lab08rest.dto.ProductRequest;
 import com.cydeo.lab08rest.model.ResponseWrapper;
 import com.cydeo.lab08rest.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -59,15 +60,15 @@ public class ProductController {
     @PostMapping
     public  ResponseEntity<ResponseWrapper> createProduct(@RequestBody ProductDTO productDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Saved",  productService.save(productDTO)));
+        return ResponseEntity.ok(new ResponseWrapper("Product Saved",  productService.save(productDTO)));
 
     }
-//    @PostMapping("/categoryandprice")
-//    public  ResponseEntity<ResponseWrapper> createCategoryPrice(@RequestBody ProductDTO productDTO){
-//
-//        return ResponseEntity.ok(new ResponseWrapper("Customer Saved",  productService.save(productDTO), HttpStatus.OK));
-//
-//    }
+    @PostMapping("/categoryandprice")
+    public  ResponseEntity<ResponseWrapper> retrieveProductByCategoryAndPrice(@RequestBody ProductRequest productRequest){
+
+        return ResponseEntity.ok(new ResponseWrapper("Product saved",  productService.retrieveAllProductByCategoryAndPrice(productRequest.getCategoryList(),productRequest.getPrice())));
+
+    }
     @PutMapping
     public  ResponseEntity<ResponseWrapper> updateProduct(@RequestBody ProductDTO productDTO)  {
         return ResponseEntity.ok(new ResponseWrapper("Product is successfuly updated",
