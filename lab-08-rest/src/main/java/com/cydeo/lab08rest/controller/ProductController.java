@@ -39,7 +39,7 @@ public class ProductController {
     @GetMapping("/price/{price}")
     public  ResponseEntity<ResponseWrapper> getProductListByPrice(@PathVariable("price") BigDecimal price){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByPrice(price)));
+        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.countProductByPrice(price)));
 
     }
 
@@ -69,9 +69,9 @@ public class ProductController {
 //
 //    }
     @PutMapping
-    public  ResponseEntity<Void> updateProduct(@RequestBody ProductDTO productDTO)  {
-        productService.update(productDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public  ResponseEntity<ResponseWrapper> updateProduct(@RequestBody ProductDTO productDTO)  {
+        return ResponseEntity.ok(new ResponseWrapper("Product is successfuly updated",
+                productService.update(productDTO)));
     }
 
 

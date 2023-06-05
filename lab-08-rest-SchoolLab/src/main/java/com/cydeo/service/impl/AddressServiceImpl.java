@@ -1,5 +1,6 @@
 package com.cydeo.service.impl;
 
+import com.cydeo.client.CountryClient;
 import com.cydeo.client.WeatherClient;
 import com.cydeo.dto.AddressDTO;
 import com.cydeo.entity.Address;
@@ -19,13 +20,15 @@ public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
     private final MapperUtil mapperUtil;
     private final WeatherClient weatherClient;
+    private final CountryClient countryClient;
     @Value("${access_key}")
     private String accessKey;
 
-    public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil, WeatherClient weatherClient) {
+    public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil, WeatherClient weatherClient, CountryClient countryClient) {
         this.addressRepository = addressRepository;
         this.mapperUtil = mapperUtil;
         this.weatherClient = weatherClient;
+        this.countryClient = countryClient;
     }
 
     @Override
@@ -41,7 +44,9 @@ public class AddressServiceImpl implements AddressService {
         Address foundAddress = addressRepository.findById(id)
                 .orElseThrow(() -> new Exception("No Address Found!"));
         AddressDTO addressDTO = mapperUtil.convert(foundAddress, new AddressDTO());
-      //  addressDTO.setCurrentTemperature();
+        addressDTO.setCurrentTemperature(retrieveCurrentWeather(addressDTO.getCity()));
+        //we will get the flag link based on the country
+    //    addressDTO.setFlag();
         return addressDTO;
 
     }
@@ -76,5 +81,15 @@ public class AddressServiceImpl implements AddressService {
         return mapperUtil.convert(addressToSave, new AddressDTO());
 
     }
+    private Integer retrieveCurrentWeather(String city){
 
+       return weatherClient.getCurrentWeather(accessKey,city).getCurrent().getTemperature();
+
+    }
+//    private String retrieveFlagByCountry(String countryName){
+//
+//      //  return countryClient.getCountryInfo(countryName).get(0).getFlag(
+//                );
+//
+//    }
 }

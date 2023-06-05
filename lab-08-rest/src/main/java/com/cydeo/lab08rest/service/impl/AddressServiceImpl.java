@@ -64,9 +64,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void update(AddressDTO addressDTO) {
-
+        Long addressId = addressDTO.getId();
         Address address = mapperUtil.convert(addressDTO, new Address());
-        addressRepository.findById(address.getId()).ifPresent(renewAddress -> {
+        addressRepository.findById(addressId).ifPresent(renewAddress -> {
     renewAddress.setName(address.getName());
             renewAddress.setStreet(address.getStreet());
             renewAddress.setZipCode(address.getZipCode());

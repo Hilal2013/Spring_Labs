@@ -31,7 +31,34 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
 
     }
+    @Override
+    public ProductDTO update(ProductDTO productDTO) {
+        Product product = mapperUtil.convert(productDTO, new Product());
+//        productRepository.findById(product.getId())
+//                .ifPresent(renewProduct->{renewProduct.setName(product.getName());
+//                    renewProduct.setPrice(product.getPrice());
+//                    renewProduct.setQuantity(product.getQuantity());
+//                    renewProduct.setRemainingQuantity(product.getRemainingQuantity());
+//                    renewProduct.setId(product.getId());
+//                   renewProduct.setCategoryList(product.getCategoryList());
+//                    productRepository.save(renewProduct);
+//                });
 
+        return mapperUtil.convert(product,new ProductDTO());
+    }
+
+    @Override
+    public ProductDTO save(ProductDTO productDTO) {
+        productRepository.save(mapperUtil.convert(productDTO,new Product()));
+        return productDTO ;
+    }
+
+    @Override
+    public List<ProductDTO> retrieveAllProductByCategoryAndPrice(List<Long> categoryList, BigDecimal price) {
+        return productRepository.retrieveProductListByCategory(categoryList,price).stream()
+                .map(product -> mapperUtil.convert(product,new ProductDTO()))
+                .collect(Collectors.toList());
+    }
     @Override
     public List<ProductDTO> findTop3() {
         return productRepository.findTop3ByOrderByPriceDesc().stream()
@@ -46,6 +73,18 @@ public class ProductServiceImpl implements ProductService {
         return mapperUtil.convert(productRepository.findFirstByName(name),new ProductDTO());
 
     }
+    @Override
+    public Integer countProductByPrice(BigDecimal price) {
+        return productRepository.countProductByPriceGreaterThan(price);
+    }
+
+    @Override
+    public List<ProductDTO> findByPriceAndQuantity(BigDecimal price, Integer quantity) {
+        return productRepository.retrieveProductListGreaterThanPriceAndLowerThanRemainingQuantity(price,quantity).stream()
+                .map(entity -> mapperUtil.convert(entity, new ProductDTO()))
+                .collect(Collectors.toList());
+
+    }
 
     @Override
     public List<ProductDTO> findByCategoryId(Long id) {
@@ -55,44 +94,4 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    @Override
-    public List<ProductDTO> findByPrice(BigDecimal price) {
-        return productRepository.findByPrice(price).stream()
-                .map(entity -> mapperUtil.convert(entity, new ProductDTO()))
-                .collect(Collectors.toList());
-
-    }
-
-    @Override
-    public List<ProductDTO> findByPriceAndQuantity(BigDecimal price, Integer quantity) {
-        return productRepository.findByPriceAndQuantity(price,quantity).stream()
-                .map(entity -> mapperUtil.convert(entity, new ProductDTO()))
-                .collect(Collectors.toList());
-
-    }
-
-    @Override
-    public ProductDTO save(ProductDTO productDTO) {
-        productRepository.save(mapperUtil.convert(productDTO,new Product()));
-        return productDTO ;
-    }
-
-    @Override
-    public ProductDTO saveCategoryAndPrice(ProductDTO productDTO) {
-        return null;
-    }
-
-    @Override
-    public void update(ProductDTO productDTO) {
-        Product product = mapperUtil.convert(productDTO, new Product());
-        productRepository.findById(product.getId())
-                .ifPresent(renewProduct->{renewProduct.setName(product.getName());
-                    renewProduct.setPrice(product.getPrice());
-                    renewProduct.setQuantity(product.getQuantity());
-                    renewProduct.setRemainingQuantity(product.getRemainingQuantity());
-                    renewProduct.setId(product.getId());
-                   renewProduct.setCategoryList(product.getCategoryList());
-                    productRepository.save(renewProduct);
-                });
-    }
 }

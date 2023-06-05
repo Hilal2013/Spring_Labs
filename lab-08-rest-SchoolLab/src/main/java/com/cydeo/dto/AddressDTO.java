@@ -36,5 +36,5 @@ public class AddressDTO {
     private TeacherDTO teacher;
 //for consuming API
     private Integer currentTemperature;
-
+private String flag;
 }

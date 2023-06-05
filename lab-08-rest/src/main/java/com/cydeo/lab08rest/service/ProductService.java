@@ -12,9 +12,10 @@ public interface ProductService {
     List<ProductDTO> findTop3();
     ProductDTO findByName(String name);
     List<ProductDTO> findByCategoryId(Long id);
-    List<ProductDTO> findByPrice(BigDecimal price);
+
     List<ProductDTO> findByPriceAndQuantity(BigDecimal price,Integer quantity);
+    Integer countProductByPrice(BigDecimal price);
     ProductDTO save(ProductDTO productDTO);
-    ProductDTO saveCategoryAndPrice(ProductDTO productDTO);
-    void update(ProductDTO productDTO);
+    List<ProductDTO> retrieveAllProductByCategoryAndPrice(List<Long> categoryList, BigDecimal price);
+    ProductDTO update(ProductDTO productDTO);
 }

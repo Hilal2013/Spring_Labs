@@ -44,7 +44,7 @@ public class AddressController {
     public ResponseEntity<Void> updateAddress(@RequestBody AddressDTO addressDTO)  {
 
         addressService.update(addressDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
