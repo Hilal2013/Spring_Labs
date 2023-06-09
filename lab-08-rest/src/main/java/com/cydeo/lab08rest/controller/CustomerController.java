@@ -19,20 +19,20 @@ public class CustomerController {
     private final CustomerService customerService;
 @GetMapping
     public ResponseEntity<ResponseWrapper> getCustomerList(){
-    return ResponseEntity.ok(new ResponseWrapper("CustomerList Retrieved", customerService.findAllCustomers()));
+    return ResponseEntity.ok(new ResponseWrapper("CustomerList Retrieved", customerService.findAllCustomers(),HttpStatus.OK));
 
     }
 @GetMapping("/{email}")
     public  ResponseEntity<ResponseWrapper> getCustomerListByEmail(@PathVariable("email") String email){
 
-    return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", customerService.findCustomerEmail(email)));
+    return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", customerService.findCustomerEmail(email),HttpStatus.OK));
 
     }
 
 @PostMapping
     public  ResponseEntity<ResponseWrapper> createCustomer(@RequestBody CustomerDTO customer){
 
-    return ResponseEntity.ok(new ResponseWrapper("Customer Saved",  customerService.save(customer)));
+    return ResponseEntity.ok(new ResponseWrapper("Customer Saved",  customerService.save(customer),HttpStatus.OK));
 
     }
 

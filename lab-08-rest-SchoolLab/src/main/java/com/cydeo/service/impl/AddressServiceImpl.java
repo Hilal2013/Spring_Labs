@@ -22,7 +22,7 @@ public class AddressServiceImpl implements AddressService {
     private final WeatherClient weatherClient;
     private final CountryClient countryClient;
     @Value("${access_key}")
-    private String accessKey;
+    private String access_key;
 
     public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil, WeatherClient weatherClient, CountryClient countryClient) {
         this.addressRepository = addressRepository;
@@ -46,7 +46,7 @@ public class AddressServiceImpl implements AddressService {
         AddressDTO addressDTO = mapperUtil.convert(foundAddress, new AddressDTO());
         addressDTO.setCurrentTemperature(retrieveCurrentWeather(addressDTO.getCity()));
         //we will get the flag link based on the country
-    //    addressDTO.setFlag();
+        addressDTO.setFlag(retrieveFlagByCountry(addressDTO.getCountry()));
         return addressDTO;
 
     }
@@ -83,13 +83,12 @@ public class AddressServiceImpl implements AddressService {
     }
     private Integer retrieveCurrentWeather(String city){
 
-       return weatherClient.getCurrentWeather(accessKey,city).getCurrent().getTemperature();
+       return weatherClient.getCurrentWeather(access_key,city).getCurrent().getTemperature();
 
     }
-//    private String retrieveFlagByCountry(String countryName){
-//
-//      //  return countryClient.getCountryInfo(countryName).get(0).getFlag(
-//                );
-//
-//    }
+    private String retrieveFlagByCountry(String countryName){
+
+       return countryClient.getCountryInfo(countryName).get(0).getFlags().getPng();
+
+    }
 }

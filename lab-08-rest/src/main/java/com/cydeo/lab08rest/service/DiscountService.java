@@ -8,7 +8,7 @@ import java.util.List;
 public interface DiscountService {
 
     List<DiscountDTO> findAllDiscount();
-    List<DiscountDTO> findAllDiscountByName(String name);
+    DiscountDTO findFirstDiscountByName(String name);
 DiscountDTO save(DiscountDTO discountDTO);
-void update(DiscountDTO discountDTO);
+DiscountDTO update(DiscountDTO discountDTO);
 }

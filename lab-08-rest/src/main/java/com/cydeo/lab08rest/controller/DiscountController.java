@@ -19,27 +19,30 @@ private final DiscountService discountService;
 
     @GetMapping
     public ResponseEntity<ResponseWrapper> getDiscountList(){
-        return ResponseEntity.ok(new ResponseWrapper("DiscountList Retrieved", discountService.findAllDiscount()));
+        return ResponseEntity.ok(new ResponseWrapper("DiscountList Retrieved", discountService.findAllDiscount(),HttpStatus.OK));
 
     }
     @GetMapping("/{name}")
     public  ResponseEntity<ResponseWrapper> getDiscountListByName(@PathVariable("name") String name){
 
-        return ResponseEntity.ok(new ResponseWrapper("Discounts Retrieved", discountService.findAllDiscountByName(name)));
+        return ResponseEntity.ok(new ResponseWrapper("Discounts Retrieved", discountService.findFirstDiscountByName(name),HttpStatus.OK));
 
     }
 
     @PostMapping
     public  ResponseEntity<ResponseWrapper> createDiscount(@RequestBody DiscountDTO discountDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("Discount Saved", discountService.save(discountDTO)));
+        return ResponseEntity.ok(new ResponseWrapper("Discount Saved", discountService.save(discountDTO),HttpStatus.OK));
 
     }
 
     @PutMapping
-    public  ResponseEntity<Void> updateDiscount(@RequestBody DiscountDTO discountDTO)  {
-        discountService.update(discountDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public  ResponseEntity<ResponseWrapper> updateDiscount(@RequestBody DiscountDTO discountDTO)  {
+
+        return ResponseEntity.ok(new ResponseWrapper("Order is successfully updated.",
+                discountService.update(discountDTO), HttpStatus.OK));
+
+
     }
 
 

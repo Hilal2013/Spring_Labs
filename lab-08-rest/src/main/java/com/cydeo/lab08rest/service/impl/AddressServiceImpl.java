@@ -63,18 +63,21 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void update(AddressDTO addressDTO) {
-        Long addressId = addressDTO.getId();
+    public AddressDTO update(AddressDTO addressDTO) {
+    //    Long addressId = addressDTO.getId();
         Address address = mapperUtil.convert(addressDTO, new Address());
-        addressRepository.findById(addressId).ifPresent(renewAddress -> {
-    renewAddress.setName(address.getName());
-            renewAddress.setStreet(address.getStreet());
-            renewAddress.setZipCode(address.getZipCode());
-            renewAddress.setId(address.getId());
-           renewAddress.setCustomer(address.getCustomer());
-            addressRepository.save(renewAddress);
-        });
+        addressRepository.save(address);
+        return mapperUtil.convert(address,new AddressDTO());
 
+//        addressRepository.findById(addressId).ifPresent(renewAddress -> {
+//    renewAddress.setName(address.getName());
+//            renewAddress.setStreet(address.getStreet());
+//            renewAddress.setZipCode(address.getZipCode());
+//            renewAddress.setId(address.getId());
+//           renewAddress.setCustomer(address.getCustomer());
+//            addressRepository.save(renewAddress);
+//        });
+//
 
     }
 

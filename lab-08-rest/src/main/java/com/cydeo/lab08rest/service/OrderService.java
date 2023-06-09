@@ -11,5 +11,5 @@ public interface OrderService {
     List<OrderDTO> findAllByCustomerEmail(String email);
     List<OrderDTO> findAllByPayment_PaymentMethod(PaymentMethod paymentMethod);
     OrderDTO save(OrderDTO orderDTO);
-    void update(OrderDTO orderDTO);
+    OrderDTO update(OrderDTO orderDTO);
 }

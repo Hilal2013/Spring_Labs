@@ -18,34 +18,34 @@ private final OrderService orderService;
     }
     @GetMapping
     public ResponseEntity<ResponseWrapper> getOrderList(){
-        return ResponseEntity.ok(new ResponseWrapper("OrderList Retrieved", orderService.findAllOrder()));
+        return ResponseEntity.ok(new ResponseWrapper("OrderList Retrieved", orderService.findAllOrder(),HttpStatus.OK));
 
     }
     @GetMapping("/email/{email}")
     public  ResponseEntity<ResponseWrapper> getOrderListByEmail(@PathVariable("email") String email){
 
-        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByCustomerEmail(email)));
+        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByCustomerEmail(email),HttpStatus.OK));
 
     }
 
     @GetMapping("/paymentMethod/{paymentMethod}")
     public  ResponseEntity<ResponseWrapper> getOrderListByPaymentMethod(@PathVariable("paymentMethod") PaymentMethod paymentMethod){
 
-        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByPayment_PaymentMethod(paymentMethod)));
-
+        return ResponseEntity.ok(new ResponseWrapper("Orders Retrieved", orderService.findAllByPayment_PaymentMethod(paymentMethod),HttpStatus.OK));
     }
 
     @PostMapping
     public  ResponseEntity<ResponseWrapper> createOrder(@RequestBody OrderDTO orderDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("Order Saved",  orderService.save(orderDTO)));
+        return ResponseEntity.ok(new ResponseWrapper("Order Saved",  orderService.save(orderDTO),HttpStatus.OK));
 
     }
 
     @PutMapping
-    public  ResponseEntity<Void> updateOrder(@RequestBody OrderDTO orderDTO)  {
-        orderService.update(orderDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public  ResponseEntity<ResponseWrapper> updateOrder(@RequestBody OrderDTO orderDTO)  {
+
+        return ResponseEntity.ok(new ResponseWrapper("Order is successfully updated.",
+                orderService.update(orderDTO), HttpStatus.OK));
     }
 
 

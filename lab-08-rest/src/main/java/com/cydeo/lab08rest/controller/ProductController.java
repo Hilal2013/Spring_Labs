@@ -22,57 +22,57 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<ResponseWrapper>  getProductList(){
-        return ResponseEntity.ok(new ResponseWrapper("ProductList Retrieved", productService.findAllProduct()));
+        return ResponseEntity.ok(new ResponseWrapper("ProductList Retrieved", productService.findAllProduct(),HttpStatus.OK));
 
     }
     @GetMapping("/{name}")
     public  ResponseEntity<ResponseWrapper> getProductListByName(@PathVariable("name") String name){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByName(name)));
+        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByName(name),HttpStatus.OK));
 
     }
     @GetMapping("/top3")
     public  ResponseEntity<ResponseWrapper> getTop3ProductList(){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findTop3()));
+        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findTop3(),HttpStatus.OK));
 
     }
     @GetMapping("/price/{price}")
     public  ResponseEntity<ResponseWrapper> getProductListByPrice(@PathVariable("price") BigDecimal price){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.countProductByPrice(price)));
+        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.countProductByPrice(price),HttpStatus.OK));
 
     }
 
     @GetMapping("/price/{price}/quantity/{quantity}")
     public  ResponseEntity<ResponseWrapper> getProductListByPrice(@PathVariable("price") BigDecimal price,@PathVariable("quantity") Integer quantity){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByPriceAndQuantity(price,quantity)));
+        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByPriceAndQuantity(price,quantity),HttpStatus.OK));
 
     }
     @GetMapping("/category/{id}")
     public  ResponseEntity<ResponseWrapper> getProductListByCategory(@PathVariable("id") Long id){
 
-        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByCategoryId(id)));
+        return ResponseEntity.ok(new ResponseWrapper("Customer Retrieved", productService.findByCategoryId(id),HttpStatus.OK));
 
     }
 
     @PostMapping
     public  ResponseEntity<ResponseWrapper> createProduct(@RequestBody ProductDTO productDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("Product Saved",  productService.save(productDTO)));
+        return ResponseEntity.ok(new ResponseWrapper("Product Saved",  productService.save(productDTO),HttpStatus.OK));
 
     }
     @PostMapping("/categoryandprice")
     public  ResponseEntity<ResponseWrapper> retrieveProductByCategoryAndPrice(@RequestBody ProductRequest productRequest){
 
-        return ResponseEntity.ok(new ResponseWrapper("Product saved",  productService.retrieveAllProductByCategoryAndPrice(productRequest.getCategoryList(),productRequest.getPrice())));
+        return ResponseEntity.ok(new ResponseWrapper("Product saved",  productService.retrieveAllProductByCategoryAndPrice(productRequest.getCategoryList(),productRequest.getPrice()),HttpStatus.OK));
 
     }
     @PutMapping
     public  ResponseEntity<ResponseWrapper> updateProduct(@RequestBody ProductDTO productDTO)  {
         return ResponseEntity.ok(new ResponseWrapper("Product is successfuly updated",
-                productService.update(productDTO)));
+                productService.update(productDTO),HttpStatus.OK));
     }
 
 

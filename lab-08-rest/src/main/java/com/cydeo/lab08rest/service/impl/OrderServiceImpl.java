@@ -1,8 +1,10 @@
 package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.OrderDTO;
+import com.cydeo.lab08rest.dto.ProductDTO;
 import com.cydeo.lab08rest.entity.Address;
 import com.cydeo.lab08rest.entity.Order;
+import com.cydeo.lab08rest.entity.Product;
 import com.cydeo.lab08rest.enums.PaymentMethod;
 import com.cydeo.lab08rest.mapper.MapperUtil;
 import com.cydeo.lab08rest.repository.OrderRepository;
@@ -53,17 +55,20 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void update(OrderDTO orderDTO) {
-        Order order = mapperUtil.convert(orderDTO, new Order());
-        orderRepository.findById(order.getId()).ifPresent(renewOrder -> {
-           renewOrder.setId(order.getId());
-            renewOrder.setPaidPrice(order.getPaidPrice());
-            renewOrder.setTotalPrice(order.getTotalPrice());
-            renewOrder.setCustomer(order.getCustomer());
-            renewOrder.setCart(order.getCart());
-            renewOrder.setPayment(order.getPayment());
-            orderRepository.save(renewOrder);
-        });
+    public OrderDTO update(OrderDTO orderDTO) {
+        Order order = orderRepository.save(mapperUtil.convert(orderDTO, new Order()));
+        return mapperUtil.convert(order,new OrderDTO());
+
+//        Order order = mapperUtil.convert(orderDTO, new Order());
+//        orderRepository.findById(order.getId()).ifPresent(renewOrder -> {
+//           renewOrder.setId(order.getId());
+//            renewOrder.setPaidPrice(order.getPaidPrice());
+//            renewOrder.setTotalPrice(order.getTotalPrice());
+//            renewOrder.setCustomer(order.getCustomer());
+//            renewOrder.setCart(order.getCart());
+//            renewOrder.setPayment(order.getPayment());
+//            orderRepository.save(renewOrder);
+//        });
 
 
     }
