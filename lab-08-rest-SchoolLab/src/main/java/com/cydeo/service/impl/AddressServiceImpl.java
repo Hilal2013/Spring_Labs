@@ -44,7 +44,9 @@ public class AddressServiceImpl implements AddressService {
         Address foundAddress = addressRepository.findById(id)
                 .orElseThrow(() -> new Exception("No Address Found!"));
         AddressDTO addressDTO = mapperUtil.convert(foundAddress, new AddressDTO());
-        addressDTO.setCurrentTemperature(retrieveCurrentWeather(addressDTO.getCity()));
+        addressDTO.setCurrentTemperatureC(retrieveCurrentWeather(addressDTO.getCity()));
+        addressDTO.setCurrentTemperatureF(((retrieveCurrentWeather(addressDTO.getCity())*9)/5)+32);
+
         //we will get the flag link based on the country
         addressDTO.setFlag(retrieveFlagByCountry(addressDTO.getCountry()));
         return addressDTO;
