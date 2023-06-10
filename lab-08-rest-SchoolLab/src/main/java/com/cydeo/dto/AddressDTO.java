@@ -35,6 +35,8 @@ public class AddressDTO {
     @JsonBackReference(value="teacher-address-reference")
     private TeacherDTO teacher;
 //for consuming API
-    private Integer currentTemperature;
+    private Integer currentTemperatureC;
+    private Integer currentTemperatureF;
+
 private String flag;
 }
