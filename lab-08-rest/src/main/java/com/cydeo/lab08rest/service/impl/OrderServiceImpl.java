@@ -101,9 +101,6 @@ return mapperUtil.convert(updatedOrder,new OrderDTO());
 
     }
 
-
-
-
     private void validateRelatedFieldsAreExist(OrderDTO orderDTO){
         if(!customerService.existById(orderDTO.getCustomerId())){
 throw new NotFoundException("Customer could not found!");

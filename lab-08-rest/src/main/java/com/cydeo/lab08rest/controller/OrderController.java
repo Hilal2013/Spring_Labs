@@ -45,7 +45,7 @@ private final OrderService orderService;
     }
 
     @PutMapping()
-    public  ResponseEntity<ResponseWrapper> updateOrder(@RequestBody OrderDTO orderDTO)  {
+    public  ResponseEntity<ResponseWrapper> updateOrder(@Valid @RequestBody OrderDTO orderDTO)  {
 
         return ResponseEntity.ok(new ResponseWrapper("Order is successfully updated.",
                 orderService.update(orderDTO), HttpStatus.OK));
