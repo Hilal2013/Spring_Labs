@@ -20,9 +20,10 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final MapperUtil mapperUtil;
-private final CustomerService customerService;
-private final PaymentService paymentService;
-private final CartService cartService;
+    private final CustomerService customerService;
+    private final PaymentService paymentService;
+    private final CartService cartService;
+
     public OrderServiceImpl(OrderRepository orderRepository, MapperUtil mapperUtil, CustomerService customerService, PaymentService paymentService, CartService cartService) {
         this.orderRepository = orderRepository;
         this.mapperUtil = mapperUtil;
@@ -35,28 +36,28 @@ private final CartService cartService;
     @Override
     public List<OrderDTO> findAllOrder() {
         return orderRepository.findAll().stream()
-                .map(entity->mapperUtil.convert(entity,new OrderDTO()))
+                .map(entity -> mapperUtil.convert(entity, new OrderDTO()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<OrderDTO> findAllByCustomerEmail(String email) {
         return orderRepository.findAllByCustomer_Email(email).stream()
-                .map(entity->mapperUtil.convert(entity,new OrderDTO()))
+                .map(entity -> mapperUtil.convert(entity, new OrderDTO()))
                 .collect(Collectors.toList());
     }
 
 
     @Override
     public List<OrderDTO> findAllByPayment_PaymentMethod(PaymentMethod paymentMethod) {
-       return orderRepository.findAllByPayment_PaymentMethod(paymentMethod).stream()
-                .map(entity->mapperUtil.convert(entity,new OrderDTO()))
+        return orderRepository.findAllByPayment_PaymentMethod(paymentMethod).stream()
+                .map(entity -> mapperUtil.convert(entity, new OrderDTO()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public OrderDTO save(OrderDTO orderDTO) {
-   orderRepository.save( mapperUtil.convert(orderDTO,new Order()));
+        orderRepository.save(mapperUtil.convert(orderDTO, new Order()));
 
         return orderDTO;
     }
@@ -65,15 +66,15 @@ private final CartService cartService;
     public OrderDTO update(OrderDTO orderDTO) {
 
 //look for the order
-        orderRepository.findById(orderDTO.getId()).orElseThrow(()->new RuntimeException("Order could not be found"));
-validateRelatedFieldsAreExist(orderDTO);
+        orderRepository.findById(orderDTO.getId()).orElseThrow(() -> new RuntimeException("Order could not be found"));
+        validateRelatedFieldsAreExist(orderDTO);
 //if  it has dependencies like customer cart payment
 //if fields are exist
-  Order updatedOrder=   orderRepository.save(mapperUtil.convert(orderDTO,new Order()));
+        Order updatedOrder = orderRepository.save(mapperUtil.convert(orderDTO, new Order()));
 
-
-return mapperUtil.convert(updatedOrder,new OrderDTO());
+        return mapperUtil.convert(updatedOrder, new OrderDTO());
     }
+
     public OrderDTO updateOrderById(Long id, UpdateOrderDTO updateOrderDTO) {
         Order order = orderRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Order could not be found."));
@@ -81,41 +82,37 @@ return mapperUtil.convert(updatedOrder,new OrderDTO());
 
         boolean changeDetected = false;
 
-        if (!order.getPaidPrice().equals(updateOrderDTO.getPaidPrice())){
+        if (!order.getPaidPrice().equals(updateOrderDTO.getPaidPrice())) {
             order.setPaidPrice(updateOrderDTO.getPaidPrice());
-            changeDetected =true;
+            changeDetected = true;
         }
 
-        if(!order.getTotalPrice().equals(updateOrderDTO.getTotalPrice())){
+        if (!order.getTotalPrice().equals(updateOrderDTO.getTotalPrice())) {
             order.setTotalPrice(updateOrderDTO.getTotalPrice());
-            changeDetected=true;
+            changeDetected = true;
         }
 
         //if there is any change, update the order and return it
-        if(changeDetected){
+        if (changeDetected) {
             Order updateOrder = orderRepository.save(order);
-            return mapperUtil.convert(updateOrder,new OrderDTO());
-        }else{
+            return mapperUtil.convert(updateOrder, new OrderDTO());
+        } else {
             throw new RuntimeException("No changes detected");
         }
 
     }
 
-    private void validateRelatedFieldsAreExist(OrderDTO orderDTO){
-        if(!customerService.existById(orderDTO.getCustomerId())){
-throw new NotFoundException("Customer could not found!");
+    private void validateRelatedFieldsAreExist(OrderDTO orderDTO) {
+        if (!customerService.existById(orderDTO.getCustomerId())) {
+            throw new NotFoundException("Customer could not found!");
         }
-        if(!paymentService.existById(orderDTO.getPaymentId())){
+        if (!paymentService.existById(orderDTO.getPaymentId())) {
             throw new RuntimeException("Payment could not found!");
         }
-        if(!cartService.existById(orderDTO.getCartId())){
+        if (!cartService.existById(orderDTO.getCartId())) {
             throw new RuntimeException("Cart could not found!");
         }
 
-
     }
-
-
-
 
 }
