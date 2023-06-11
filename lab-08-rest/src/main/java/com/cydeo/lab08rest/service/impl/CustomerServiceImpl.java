@@ -57,4 +57,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     }
+
+    @Override
+    public Boolean existById(Long customerId) {
+
+            return customerRepository.existsById(customerId);
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.cydeo.lab08rest.service;
 
 import com.cydeo.lab08rest.dto.OrderDTO;
+import com.cydeo.lab08rest.dto.UpdateOrderDTO;
 import com.cydeo.lab08rest.entity.Order;
 import com.cydeo.lab08rest.enums.PaymentMethod;
 
@@ -12,4 +13,5 @@ public interface OrderService {
     List<OrderDTO> findAllByPayment_PaymentMethod(PaymentMethod paymentMethod);
     OrderDTO save(OrderDTO orderDTO);
     OrderDTO update(OrderDTO orderDTO);
+    OrderDTO updateOrderById(Long id, UpdateOrderDTO updateOrderDTO);
 }
