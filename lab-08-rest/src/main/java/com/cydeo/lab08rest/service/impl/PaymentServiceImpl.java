@@ -13,7 +13,7 @@ private final PaymentRepository paymentRepository;
     }
 
     @Override
-    public boolean existById(Long customerId) {
-        return paymentRepository.existsById(customerId);
+    public boolean existById(Long id) {
+        return paymentRepository.existsById(id);
     }
 }

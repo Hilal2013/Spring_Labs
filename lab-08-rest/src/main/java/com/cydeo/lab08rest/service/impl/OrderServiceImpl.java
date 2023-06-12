@@ -107,10 +107,10 @@ public class OrderServiceImpl implements OrderService {
             throw new NotFoundException("Customer could not found!");
         }
         if (!paymentService.existById(orderDTO.getPaymentId())) {
-            throw new RuntimeException("Payment could not found!");
+            throw new NotFoundException("Payment could not found!");
         }
         if (!cartService.existById(orderDTO.getCartId())) {
-            throw new RuntimeException("Cart could not found!");
+            throw new NotFoundException("Cart could not found!");
         }
 
     }
