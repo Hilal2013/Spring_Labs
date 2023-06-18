@@ -8,11 +8,22 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+
+    @ExceptionHandler(CurrencyException.class)
+    public ResponseEntity<ExceptionWrapper> handleCurrencyTypeNotFoundException(CurrencyException ex){
+
+        ExceptionWrapper exceptionWrapper = new ExceptionWrapper(ex.getMessage(), HttpStatus.NOT_FOUND );
+        exceptionWrapper.setTimestap(LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionWrapper);
+    }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionWrapper> processNotFoundException(NotFoundException ex){

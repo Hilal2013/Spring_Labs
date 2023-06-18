@@ -33,4 +33,8 @@ public class OrderDTO {
     private Long paymentId;
 
     private Long id;
+
+//  private  String currency;
+//  private  String source;
+//  private  int format;
 }

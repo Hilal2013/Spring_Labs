@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/order")
@@ -24,6 +25,9 @@ private final OrderService orderService;
         return ResponseEntity.ok(new ResponseWrapper("OrderList Retrieved", orderService.findAllOrder(),HttpStatus.OK));
 
     }
+
+
+
     @GetMapping("/email/{email}")
     public  ResponseEntity<ResponseWrapper> getOrderListByEmail(@PathVariable("email") String email){
 
@@ -31,6 +35,14 @@ private final OrderService orderService;
 
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseWrapper> getOrderById(@PathVariable("id") Long id,
+                                                        @RequestParam(required = false) Optional<String> currency){
+
+        return ResponseEntity.ok(new ResponseWrapper("Order is successfully retrieved.",
+                orderService.retrieveOrderDetailById(id,currency), HttpStatus.OK));
+    }
     @GetMapping("/paymentMethod/{paymentMethod}")
     public  ResponseEntity<ResponseWrapper> getOrderListByPaymentMethod(@PathVariable("paymentMethod") PaymentMethod paymentMethod){
 

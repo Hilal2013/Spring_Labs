@@ -21,7 +21,7 @@ public class AddressServiceImpl implements AddressService {
     private final MapperUtil mapperUtil;
     private final WeatherClient weatherClient;
     private final CountryClient countryClient;
-    @Value("${access_key}")
+    @Value("882f3b74a85fd952bc64b997311a4192")
     private String access_key;
 
     public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil, WeatherClient weatherClient, CountryClient countryClient) {
@@ -46,7 +46,6 @@ public class AddressServiceImpl implements AddressService {
         AddressDTO addressDTO = mapperUtil.convert(foundAddress, new AddressDTO());
         addressDTO.setCurrentTemperatureC(retrieveCurrentWeather(addressDTO.getCity()));
         addressDTO.setCurrentTemperatureF(((retrieveCurrentWeather(addressDTO.getCity())*9)/5)+32);
-
         //we will get the flag link based on the country
         addressDTO.setFlag(retrieveFlagByCountry(addressDTO.getCountry()));
         return addressDTO;
