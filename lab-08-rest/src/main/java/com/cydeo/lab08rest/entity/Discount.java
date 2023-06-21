@@ -17,4 +17,8 @@ public class Discount extends BaseEntity{
     private BigDecimal discount;
     @Enumerated(value = EnumType.STRING)
     private DiscountType discountType;
+
+    //newly added
+    //in cart 100$// for minDiscount 250$ you need to add 150$ to get discount
+    private BigDecimal minimumAmount;
 }
