@@ -23,8 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class OrderControllerTest {
 
     @Autowired
-    private MockMvc mvc;
-
+    private MockMvc mvc;//it is not accesible after test finish//you are basically run app
+    // and make request after that you destroy the app again
+//I dont want to inject real bean
     @Test
     public void createOrder() throws Exception {
         OrderDTO orderDTO = new OrderDTO();
@@ -104,5 +105,6 @@ class OrderControllerTest {
             throw new RuntimeException(e);
         }
     }
-
+//placeOrder method
+    //create DTO(placeOrderDTO) class to have input parameters for placeOrder method inside
 }
