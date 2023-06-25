@@ -15,9 +15,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ExtendWith(SpringExtension.class)//we say that for integration we use Spring
+@DataJpaTest//i dont want to test the rest of the app//I just want to test repostiry//no need springboot test
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)//we say that im gonna use my postgres
 public class CartRepositoryIntegrationTest {
 
     @Autowired
@@ -25,7 +25,6 @@ public class CartRepositoryIntegrationTest {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // If tests are failing, please run tests one by one. not on the class level.
     @Test
     public void should_find_all_cart_with_discount_type_is_amount_based(){
         List<Cart> cartList = cartRepository.findAllByDiscountDiscountType(DiscountType.AMOUNT_BASED);
@@ -59,5 +58,5 @@ public class CartRepositoryIntegrationTest {
         List<Cart> cartList = cartRepository.findAllByCustomerIdAndCartStateAndDiscountIsNotNull(CartState.CREATED.name(),1L);
         assertThat(cartList).hasSize(500);
     }
-
+//please write all of the queries
 }

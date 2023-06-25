@@ -24,6 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,10 +41,11 @@ public class CartServiceImplUnitTest {
     //to be able to initiliaze this class//we need to inject mocks inside this class
     @InjectMocks
     private CartServiceImpl cartService;
-//addToCart method first line find product if not throw
+
+    //addToCart method first line find product if not throw
     @Test
-    public void should_not_add_to_cart_when_product_doesnt_exist(){
-when(productRepository.findById(1L)).thenReturn(Optional.empty());
+    public void should_not_add_to_cart_when_product_doesnt_exist() {
+        when(productRepository.findById(1L)).thenReturn(Optional.empty());
 //findById is returning optional value //if returns empty =>im expecting runtimeexception
         //catchThrowable is static method=> inside lambda
         Throwable throwable = catchThrowable(() ->
@@ -52,9 +54,10 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
 
 
     }
+
     //addToCart method second line
     @Test
-    public void should_throw_exception_when_product_remaining_quantity_is_less_than_quantity(){
+    public void should_throw_exception_when_product_remaining_quantity_is_less_than_quantity() {
         Product product = new Product();
         product.setRemainingQuantity(10);
 
@@ -69,7 +72,7 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
     //addToCart method third line
 
     @Test
-    public void should_add_item_to_cart_when_cart_exists_and_cart_item_exists_in_the_cart(){
+    public void should_add_item_to_cart_when_cart_exists_and_cart_item_exists_in_the_cart() {
         // Given
         //i need product,cart, cartitem
         Product product = new Product();
@@ -99,15 +102,54 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
         assertTrue(result);
         assertThat(cartItem.getQuantity()).isEqualTo(10);
     }
+
     //addToCart method fourth line and checkCardCount method first line
     // scenario 1 -> cart doesn't exist for customer or cart list is null (new Arraylist or null)
+    @Test
+    public void should_add_item_to_cart_when_cart_doesnt_exist_or_cart_list_is_null() {
+        Product product = new Product();
+        product.setId(1L);
+        product.setQuantity(10);
+        product.setName("Orange");
+        product.setPrice(BigDecimal.TEN);
+        product.setRemainingQuantity(10);
+
+        Customer customer = new Customer();
+        customer.setId(1L);
+
+       when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+       when(cartRepository.findAllByCustomerIdAndCartState(customer.getId(),CartState.CREATED)).thenReturn(null);
+        when(cartItemRepository.findAllByCartAndProduct(any(), any())).thenReturn(null);
+        boolean result = cartService.addToCart(customer, product.getId(), 3);
+        assertTrue(result);
+
+    }
 
     // scenario 2 -> cart exist but cart item doesn't exist
+    @Test
+    public void should_add_to_cart_when_cart_exist_and_car_item_not_exist() {
+        Product product = new Product();
+        product.setId(1L);
+        product.setRemainingQuantity(10);
+
+        Cart cart = new Cart();
+        cart.setCartState(CartState.CREATED);
+        List<Cart> cartList=new ArrayList<>();
+        cartList.add(cart);
+        Customer customer = new Customer();
+        customer.setId(1L);
+        when(productRepository.findById(product.getId())).thenReturn(Optional.of(product));
+        when(cartRepository.findAllByCustomerIdAndCartState
+                (customer.getId(), CartState.CREATED)).thenReturn(cartList);
+        when(cartItemRepository.findAllByCartAndProduct(cart, product)).thenReturn(null);
+        boolean result = cartService.addToCart(customer, product.getId(), 8);
+        assertTrue(result);
+    }
 
 
     //checkCardCount method second line
     @Test
-    public void should_throw_an_exception_when_cart_list_size_is_two(){
+    public void should_throw_an_exception_when_cart_list_size_is_two() {
         Product product = new Product();
         product.setId(1L);
         product.setRemainingQuantity(10);
@@ -134,9 +176,9 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
         assertThat(throwable).isInstanceOf(RuntimeException.class);
     }
 
-//unit test for applyDiscountTocart method
+    //unit test for applyDiscountTocart method
     @Test
-    public void should_throw_exception_when_discount_not_exists(){
+    public void should_throw_exception_when_discount_not_exists() {
         when(discountRepository.findFirstByName("discount")).thenReturn(null);
 
         Throwable throwable = catchThrowable(() ->
@@ -144,8 +186,9 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
         assertThat(throwable).isInstanceOf(RuntimeException.class);
         assertThat(throwable).hasMessage("Discount couldn't find ");
     }
+
     @Test
-    public void should_throw_exception_when_discount_amount_is_null(){
+    public void should_throw_exception_when_discount_amount_is_null() {
 
         Discount discount = new Discount();
 
@@ -160,11 +203,33 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
 
     // homework
     // discount minimum amount also needs to had a value, otherwise we will throw exception
-    // discount minimum amount and discount amount also needs to had a value bigger than ZERO, otherwise we will throw exception
+    @Test
+    public void should_throw_exception_when_discount_minimum_amount_is_null(){
+        Discount discount = new Discount();
+        discount.setDiscount(BigDecimal.TEN);//define discount amount but not set min amount to be null
 
+        when(discountRepository.findFirstByName("dummy")).thenReturn(discount);
+      Throwable throwable=catchThrowable(()-> cartService
+              .applyDiscountToCartIfApplicableAndCalculateDiscountAmount("dummy",new Cart())) ;
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasMessage("Discount minimum amount can not be null ");
+    }
+
+
+    // discount minimum amount and discount amount also needs to had a value bigger than ZERO, otherwise we will throw exception
+    @Test
+    public void should_throw_exception_when_discount_minimum_amount_is_zero(){
+        Discount discount = new Discount();
+        discount.setDiscount(BigDecimal.TEN);
+        discount.setMinimumAmount(BigDecimal.ZERO);
+
+        when(discountRepository.findFirstByName("dummy")).thenReturn(discount);
+        Throwable throwable=catchThrowable(()-> cartService
+                .applyDiscountToCartIfApplicableAndCalculateDiscountAmount("dummy",new Cart())) ;
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasMessage("Discount amount needs be bigger than zero ");
+    }
 
     @Test
-    public void should_throw_exception_when_cart_item_list_is_zero(){
+    public void should_throw_exception_when_cart_item_list_is_zero() {
         Discount discount = new Discount();
         discount.setDiscount(BigDecimal.TEN);
         discount.setMinimumAmount(BigDecimal.valueOf(100));
@@ -183,7 +248,7 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
 
 
     @Test
-    public void should_throw_exception_when_cart_item_list_null(){
+    public void should_throw_exception_when_cart_item_list_null() {
         Discount discount = new Discount();
         discount.setDiscount(BigDecimal.TEN);
         discount.setMinimumAmount(BigDecimal.valueOf(100));
@@ -199,8 +264,9 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
         assertThat(throwable).isInstanceOf(RuntimeException.class);
         assertThat(throwable).hasMessage("There is no item in the cart");
     }
+
     @Test
-    public void should_return_zero_discount_when_total_cart_amount_less_than_minimum_amount(){
+    public void should_return_zero_discount_when_total_cart_amount_less_than_minimum_amount() {
         Discount discount = new Discount();
         discount.setDiscount(BigDecimal.TEN);
         discount.setMinimumAmount(BigDecimal.valueOf(100));
@@ -230,7 +296,7 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
     }
 
     @Test
-    public void should_return_discount_amount_when_total_cart_amount_greater_than_minimum_amount_when_discount_type_is_amount_based(){
+    public void should_return_discount_amount_when_total_cart_amount_greater_than_minimum_amount_when_discount_type_is_amount_based() {
         Discount discount = new Discount();
         discount.setDiscount(BigDecimal.TEN);
         discount.setMinimumAmount(BigDecimal.valueOf(100));
@@ -260,7 +326,7 @@ when(productRepository.findById(1L)).thenReturn(Optional.empty());
     }
 
     @Test
-    public void should_return_discount_amount_when_total_cart_amount_greater_than_minimum_amount_when_discount_type_is_rate_based(){
+    public void should_return_discount_amount_when_total_cart_amount_greater_than_minimum_amount_when_discount_type_is_rate_based() {
         Discount discount = new Discount();
         discount.setDiscount(BigDecimal.TEN);
         discount.setMinimumAmount(BigDecimal.valueOf(100));

@@ -34,7 +34,7 @@ public class OrderServiceImplIntegrationTest {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // If tests are failing, please run tests one by one. not on the class level.
+
 
     @Test
     public void should_place_order_when_payment_method_is_transfer(){
